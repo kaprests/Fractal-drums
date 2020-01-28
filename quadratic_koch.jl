@@ -2,10 +2,20 @@ import PyPlot
 plt = PyPlot
 
 
+@enum Location inside outside border
+
+
+function make_lattice(level)
+    side_length = 4^(level-1)
+    lattice = Array{Location, 2}()
+end
+
+
 function generate_side(side)
     """ performs one generate step on a side of the fractal """
     a = side[1]
     b = side[2]
+    #len = max(abs(b[1]-a[1]), abs(b[2]-a[2]))
     len = sqrt((a[1]-b[1])^2 + (a[2]-b[2])^2)/4
     # Generate six corners, c, d, e, f, g, h
     # return resulting corners
@@ -60,7 +70,7 @@ function gen_frac(level, corners)
     println("LEVEL: ", level)
     if level == 0
         println("Returned corners: ", summary(corners))
-        return corners
+        return unique(corners)
     else
         num_corners = size(corners, 1)
         sides = []
@@ -113,7 +123,7 @@ end
 
 function test()
     println("Definging test data")
-    level = 3
+    level = 2
     len = 10
     side = [(1,1), (1+len,1)]
     corners = [(1,1), (1+len, 1), (1+len, 1+len), (1, 1+len)]
