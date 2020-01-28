@@ -4,11 +4,11 @@ plt = PyPlot
 include("quadratic_koch.jl")
 
 
-level = 1
+level = 2
 L = 5 # fractal side length
 corners = [(1,1), (1+L, 1), (1+L, 1+L), (1, 1+L)]
 frac_points = gen_frac(level, corners)
-x_frac, y_frac = plotify(frac_points)
+x_frac, y_frac = first.(frac_points), last.(frac_points)
 
 
 @enum Location inside outside border
@@ -18,15 +18,6 @@ struct Point
     x::Real
     y::Real
     location::Location
-end
-
-
-function traverse(x, upper)
-    if x < upper/2
-        x -= 1
-    else
-        x += 1
-    end
 end
 
 
@@ -128,7 +119,7 @@ function gen_lattice(x, y, frac_points)
     end
 
     println(summary(coords))
-    x, y = plotify(coords)
+    x, y = first.(coords), last.(coords)
     println(summary(x))
     return x_lat, y_lat, lattice
 end
@@ -155,6 +146,11 @@ for point in lattice
     end
 end
 println("Points inside fractal: ", length(x_inside))
+
+println("#####################")
+println(minimum(x_inside)/abs(x_inside[1]-x_inside[2]))
+println(minimum(y_inside))
+println("#####################")
 
 plt.plot(x_inside, y_inside, ".", color="green", label="inside")
 plt.plot(x_border, y_border, "v", color="red", label="on fractal border")

@@ -2,13 +2,44 @@ import PyPlot
 plt = PyPlot
 
 
+### Refactoring
+############################################################################
 @enum Location inside outside border
 
 
-function make_lattice(level)
-    side_length = 4^(level-1)
-    lattice = Array{Location, 2}()
+function make_lattice(level, frac_points, defloc=outside)
+    side_length = (4^(level) + 1) + 100
+    lattice = fill(defloc, (side_length, side_length))
+    min = -minimum(first.(frac_points)) + 10
+
+    for (x, y) in frac_points
+        lattice[convert(Int, x+min), convert(Int, y+min)] = border
+    end
+
+    return lattice
 end
+
+
+function arrayify(lattice)
+    """ Make arrays from lattice cartesian indices """
+    #len = length(lattice[1,:])^2
+    #x = zeros(len)
+    #y = zeros(len)
+    x = []
+    y = []
+    for (idx, p) in enumerate(CartesianIndices(lattice))
+        #x[idx] = p[1]
+        #y[idx] = p[2]
+        if lattice[p] == border
+            push!(x, p[1])
+            push!(y, p[2])
+        end
+    end
+    return x, y
+end
+
+
+###########################################################################
 
 
 function generate_side(side)
@@ -73,64 +104,62 @@ function gen_frac(level, corners)
         return unique(corners)
     else
         num_corners = size(corners, 1)
-        sides = []
-        #sides = Array{Array{Tuple{Real, Real}}}(undef, 4)
+        sides = Array{Array, 1}(undef, length(corners))
         for i in 1:num_corners
             if i < num_corners
                 a = corners[i]
                 b = corners[i+1]
-                append!(sides,generate_side([a, b]))
+                sides[i] = generate_side([a, b])
             else
-                append!(sides, reverse(generate_side([corners[1], corners[end]])))
+                sides[i] = reverse(generate_side([corners[1], corners[end]]))
             end
         end
-        corners = sides
+        corners = collect(Base.Iterators.flatten(sides))
         level -= 1
-        println("RECURSIVE CALL")
         gen_frac(level, corners)
     end
 end
 
 
+function gen_initial_square(level)
+    side_length = 4^(level)
+    min = 1
+    max = side_length+min
+    a = (min, min)
+    b = (max, min)
+    c = (max, max)
+    d = (min, max)
+    return [a, b, c, d]
+end
+
+
 function plot_fractal(points)
     """ Takes a list of tuples as x,y-pairs and plots """
-    println("prepare for plotting")
-    num_points = size(points, 1)
-    x = zeros(num_points)
-    y = zeros(num_points)
-    for i in 1:num_points
-        x[i] = points[i][1]
-        y[i] = points[i][2]
-    end
     println("plotting")
-    plt.plot(x, y)
+    plt.plot(first.(points), last.(points))
     plt.show()
 end
 
-
-function plotify(points)
-    """ prepare for plotting """
-    num_points = size(points, 1)
-    x = zeros(num_points)
-    y = zeros(num_points)
-    for i in 1:num_points
-        x[i] = points[i][1]
-        y[i] = points[i][2]
-    end   
-    return x, y
-end
 
 
 function test()
     println("Definging test data")
     level = 2
-    len = 10
-    side = [(1,1), (1+len,1)]
-    corners = [(1,1), (1+len, 1), (1+len, 1+len), (1, 1+len)]
-    #corners = [(1,1), (1+len, 1)]
-    println("Calling rec func")
+    corners = gen_initial_square(level)
     frac_points = gen_frac(level, corners)
     plot_fractal(frac_points)
+end
+
+
+function test_ref()
+    level = 3
+    square = gen_initial_square(level)
+    println(square)
+    frac_points = gen_frac(level, square)
+    lattice = make_lattice(level, frac_points)
+    x, y = arrayify(lattice)
+    plt.plot(x, y, ".")
+    plt.show()
 end
 
 
