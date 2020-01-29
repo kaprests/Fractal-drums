@@ -2,18 +2,19 @@ import PyPlot
 plt = PyPlot
 
 
-### Refactoring
+### Refactoring of lattice creation
 ############################################################################
 @enum Location inside outside border
 
 
 function make_lattice(level, frac_points, defloc=outside)
-    side_length = (4^(level) + 1) + 100
+    side_length = (4^(level) + 1) 
     lattice = fill(defloc, (side_length, side_length))
     min = -minimum(first.(frac_points)) + 10
+    println(min)
 
     for (x, y) in frac_points
-        lattice[convert(Int, x+min), convert(Int, y+min)] = border
+        lattice[convert(Int, x), convert(Int, y)] = border
     end
 
     return lattice
@@ -37,11 +38,11 @@ function arrayify(lattice)
     end
     return x, y
 end
-
-
 ###########################################################################
 
 
+### Generate Koch fractal
+###########################################################################
 function generate_side(side)
     """ performs one generate step on a side of the fractal """
     a = side[1]
@@ -139,10 +140,136 @@ function plot_fractal(points)
     plt.plot(first.(points), last.(points))
     plt.show()
 end
+###########################################################################
+
+
+### Lattice creation
+###########################################################################
+"""
+
+"""
+@enum Location inside outside border
+
+
+struct Point
+    x::Real
+    y::Real
+    location::Location
+end
+
+
+function is_enclosed(p::Tuple, lower, upper, frac_points, lat_const)
+    """ Chech if arbitrary point is inside, on or outside of fractal """
+    x = p[1]
+    x_walker = p[1]
+    y = p[2]
+
+    if (x, y) in frac_points
+        # Point on border, not inside fractal
+        return Point(x, y, border)
+    end
+    
+    if x > upper/2
+        # Traverse right
+        while x_walker < upper
+            x_walker += lat_const
+            if (x_walker, y) in frac_points
+                # collision
+                idx = findall(p->p==(x_walker, y), frac_points)[1]
+                border = frac_points[idx]
+                border_next = frac_points[idx+1]
+                border_prev = frac_points[idx-1]
+                if border_next[1] > border[1] && border_prev[2] < border[2]
+                    # next border is right and border_prev is down
+                    return Point(x, y, inside)
+                elseif border_next[2] > border[2] && border_prev[1] > border[1]
+                    # next border is up, and prev is right
+                    return Point(x, y, inside)
+                elseif border_next[2] > border[2] && border_prev[2] < border[2]
+                    # next is up prev is down
+                    return Point(x, y, inside)
+                else
+                    return Point(x, y, outside)
+                end
+            end
+        end
+        return Point(x, y, outside)
+    else
+        # Traverse right
+        while x_walker > lower
+            x_walker -= lat_const
+            if (x_walker, y) in frac_points
+                # collision
+                idx = findall(p->p==(x_walker, y), frac_points)[1]
+                border = frac_points[idx]
+                border_next = frac_points[idx+1]
+                border_prev = frac_points[idx-1]
+                if border_next[2] < border[2] && border_prev[1] < border[1]
+                    # next border is down, prev is left
+                    return Point(x, y, inside)
+                elseif border_next[1] < border[1] && border_prev[2] > border[2]
+                    # next border is left, prev is up
+                    return Point(x, y, inside)
+                elseif border_next[2] < border[2] && border_prev[2] > border[2]
+                    # next is down, prev is up
+                    return Point(x, y, inside)
+                else
+                    return Point(x, y, outside)
+                end
+            end
+        end
+        return Point(x, y, outside)
+    end
+end
+
+
+function is_enclosed2()
+    """ Chech if arbitrary point is inside, on or outside of fractal, alternate method """
+end
+
+
+function determine_point_locations(frac_points, lattice_points)
+    """
+    Given all lattice point coordinates and fractal coordinates, determines wether every point is
+    inside, on or outside of the fractal
+    """
+    center = lattice_points[convert(Int, round(end/2))]
+end
+
+
+function gen_lattice(x, y, frac_points)
+    lat_const = x[2] - x[1]
+    min_frac = min(x...)
+    max_frac = max(x...)
+    lattice_vals = collect(min_frac:lat_const:max_frac)
+    L_lat = size(lattice_vals, 1)
+    x_lat = transpose(repeat(lattice_vals, 1, L_lat))
+    y_lat = repeat(lattice_vals, 1, L_lat)
+    lat_size = size(x_lat, 1) * size(x_lat, 2)
+    coords = collect(zip(x_lat, y_lat)) # List of coordinates as tuples
+
+    lattice = Array{Point}(undef, (L_lat, L_lat))
+
+    println("Making lattice, checking for insiders")
+    for (i, coord) in enumerate(coords)
+        lattice[i]=is_enclosed(coord, min_frac, max_frac, frac_points, lat_const)
+    end
+
+    println(summary(coords))
+    x, y = first.(coords), last.(coords)
+    println(summary(x))
+    return x_lat, y_lat, lattice
+end
 
 
 
-function test()
+###########################################################################
+
+
+
+### Executing functions
+###########################################################################
+function fractal_exec()
     println("Definging test data")
     level = 2
     corners = gen_initial_square(level)
@@ -151,8 +278,7 @@ function test()
 end
 
 
-function test_ref()
-    level = 3
+function fractal_ref_exec(level)
     square = gen_initial_square(level)
     println(square)
     frac_points = gen_frac(level, square)
@@ -163,4 +289,49 @@ function test_ref()
 end
 
 
-#test()
+function fractal_lattice_excec(level)
+    corners = gen_initial_square(level)
+    frac_points = gen_frac(level, corners)
+    x_frac, y_frac = first.(frac_points), last.(frac_points)
+    x_lattice, y_lattice, lattice = gen_lattice(x_frac, y_frac, frac_points)
+
+    num_inside = 0
+    x_inside = []
+    y_inside = []
+    x_border = []
+    y_border = []
+    x_outside = []
+    y_outside = []
+    for point in lattice
+        if point.location == inside
+            push!(x_inside, point.x)
+            push!(y_inside, point.y)
+        elseif point.location == border
+            push!(x_border, point.x)
+            push!(y_border, point.y)
+        else
+            push!(x_outside, point.x)
+            push!(y_outside, point.y)
+        end
+    end
+    println("Points inside fractal: ", length(x_inside))
+
+    #println("#####################")
+    #println(minimum(x_inside)/abs(x_inside[1]-x_inside[2]))
+    #println(minimum(y_inside))
+    #println("#####################")
+
+    plt.plot(x_inside, y_inside, ".", color="green", label="inside")
+    plt.plot(x_border, y_border, "v", color="red", label="on fractal border")
+    plt.plot(x_outside, y_outside, ".", color="blue", label="outside")
+    plt.plot(x_frac, y_frac, label="fractal")
+    plt.legend()
+    plt.savefig("quad_koch_on_lattice_level1.pdf")
+    plt.show()
+end
+###########################################################################
+
+level = 2
+fractal_lattice_excec(level)
+
+
