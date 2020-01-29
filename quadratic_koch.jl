@@ -283,13 +283,8 @@ function fractal_ref_exec(level)
 end
 
 
-function fractal_lattice_excec(level)
-    corners = gen_initial_square(level)
-    frac_points = gen_frac(level, corners)
-    x_frac, y_frac = first.(frac_points), last.(frac_points)
-    x_lattice, y_lattice, lattice = gen_lattice(x_frac, y_frac, frac_points)
-
-    num_inside = 0
+function get_location_points(lattice)
+""" extracts arrays with the different locations """
     x_inside = []
     y_inside = []
     x_border = []
@@ -308,7 +303,18 @@ function fractal_lattice_excec(level)
             push!(y_outside, point.y)
         end
     end
-    println("Points inside fractal: ", length(x_inside))
+    println("#points inside: ", length(x_inside))
+    return x_inside, y_inside, x_outside, y_outside, x_border, y_border
+end
+
+
+function fractal_lattice_excec(level)
+    corners = gen_initial_square(level)
+    frac_points = gen_frac(level, corners)
+    x_frac, y_frac = first.(frac_points), last.(frac_points)
+    x_lattice, y_lattice, lattice = gen_lattice(x_frac, y_frac, frac_points)
+
+    x_inside, y_inside, x_outside, y_outside, x_border, y_border = get_location_points(lattice)
 
     #println("#####################")
     #println(minimum(x_inside)/abs(x_inside[1]-x_inside[2]))
@@ -325,7 +331,16 @@ function fractal_lattice_excec(level)
 end
 ###########################################################################
 
-level = 2
-fractal_lattice_excec(level)
 
+### functions for exporting
+###########################################################################
+function gen_quadkoch(level)
+    initial_square = gen_initial_square(level)
+    frac_points = gen_frac(level, initial_square)
+    x_frac, y_frac = first.(frac_points), last.(frac_points)
+    x_lattice, y_lattice, lattice = gen_lattice(x_frac, y_frac, frac_points)
+    return lattice, x_lattice, y_lattice, frac_points
+end
+###########################################################################
 
+#fractal_lattice_excec(2)
