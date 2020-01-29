@@ -2,11 +2,11 @@ import PyPlot
 plt = PyPlot
 
 
-### Refactoring of lattice creation
-############################################################################
 @enum Location inside outside border
 
-
+### Refactoring of lattice creation
+### Represent lattice by a normal 2D array
+############################################################################
 function make_lattice(level, frac_points, defloc=outside)
     side_length = (4^(level) + 1) 
     lattice = fill(defloc, (side_length, side_length))
@@ -145,12 +145,6 @@ end
 
 ### Lattice creation
 ###########################################################################
-"""
-
-"""
-@enum Location inside outside border
-
-
 struct Point
     x::Real
     y::Real
@@ -326,7 +320,7 @@ function fractal_lattice_excec(level)
     plt.plot(x_outside, y_outside, ".", color="blue", label="outside")
     plt.plot(x_frac, y_frac, label="fractal")
     plt.legend()
-    plt.savefig("quad_koch_on_lattice_level1.pdf")
+    #plt.savefig("quad_koch_on_lattice_level1.pdf")
     plt.show()
 end
 ###########################################################################
