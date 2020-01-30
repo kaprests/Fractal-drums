@@ -134,12 +134,6 @@ function gen_initial_square(level)
 end
 
 
-function plot_fractal(points)
-    """ Takes a list of tuples as x,y-pairs and plots """
-    println("plotting")
-    plt.plot(first.(points), last.(points))
-    plt.show()
-end
 ###########################################################################
 
 
@@ -152,14 +146,32 @@ struct Point
 end
 
 
+### TODO: implement, test and compare another method
 function is_enclosed(p::Tuple, lower, upper, frac_points, lat_const)
-    """ Chech if arbitrary point is inside, on or outside of fractal """
+    """
+    Chech if arbitrary point is inside, on or outside of fractal.
+    Checks by traversing from the point til the border and determine
+    inside/outside of fractal from the orientation of the curve.
+    Checks if point is on border before traversing
+
+    All points on the traverse path between the initial point and the
+    border will have same location. Therfore it is not needed to 
+    do this traverse check for every point.
+
+    returns:
+        determined_points: list of points (tuples)
+        location: inside/outside/border
+    """
     x = p[1]
     x_walker = p[1]
     y = p[2]
 
+    determined_points = []
+
     if (x, y) in frac_points
         # Point on border, not inside fractal
+        push!(determined_points, p)
+        #return determined_points, border
         return Point(x, y, border)
     end
     
@@ -176,18 +188,25 @@ function is_enclosed(p::Tuple, lower, upper, frac_points, lat_const)
                 if border_next[1] > border[1] && border_prev[2] < border[2]
                     # next border is right and border_prev is down
                     return Point(x, y, inside)
+                    # return determined_points, inside
                 elseif border_next[2] > border[2] && border_prev[1] > border[1]
                     # next border is up, and prev is right
                     return Point(x, y, inside)
+                    # return determined_points, inside
                 elseif border_next[2] > border[2] && border_prev[2] < border[2]
                     # next is up prev is down
                     return Point(x, y, inside)
+                    # return determined_points, inside
                 else
                     return Point(x, y, outside)
+                    # return determined_points, outside
                 end
+            else
+                push!(determined_points, (x_walker, y))
             end
         end
         return Point(x, y, outside)
+        #return determined_points, outside
     else
         # Traverse right
         while x_walker > lower
@@ -201,24 +220,26 @@ function is_enclosed(p::Tuple, lower, upper, frac_points, lat_const)
                 if border_next[2] < border[2] && border_prev[1] < border[1]
                     # next border is down, prev is left
                     return Point(x, y, inside)
+                    # return determined_points, inside
                 elseif border_next[1] < border[1] && border_prev[2] > border[2]
                     # next border is left, prev is up
                     return Point(x, y, inside)
+                    # return determined_points, inside
                 elseif border_next[2] < border[2] && border_prev[2] > border[2]
                     # next is down, prev is up
                     return Point(x, y, inside)
+                    # return determined_points, inside
                 else
                     return Point(x, y, outside)
+                    # return determined_points, outside
                 end
+            else
+                push!(determined_points, (x_walker, y))
             end
         end
         return Point(x, y, outside)
+        # return determined_points, outside
     end
-end
-
-
-function is_enclosed2()
-    """ Chech if arbitrary point is inside, on or outside of fractal, alternate method """
 end
 
 
@@ -226,6 +247,9 @@ function determine_point_locations(frac_points, lattice_points)
     """
     Given all lattice point coordinates and fractal coordinates, determines wether every point is
     inside, on or outside of the fractal
+
+    possible canidate for different method for checking points location:
+    Breadth-first search like method
     """
     center = lattice_points[convert(Int, round(end/2))]
 end
@@ -256,9 +280,7 @@ function gen_lattice(x, y, frac_points)
 end
 
 
-
 ###########################################################################
-
 
 
 ### Executing functions
