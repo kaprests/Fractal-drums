@@ -41,7 +41,7 @@ for i in 1:5
         grid[Int(p[1]), Int(p[2]), i] = abs(eigvecs[:, idx][j])
     end
     plt.imshow(grid[:, :, i])
-    plt.savefig(string("eigenmode_cntr_", i, ".pdf"))
+    plt.savefig(string("eigenmode_cntr_", i, ".png"))
     plt.title(string("eigenmode #", i))
     plt.show()
 end
@@ -52,5 +52,5 @@ plt.plot(first.(points_outside), last.(points_outside), ".", color="red")
 plt.plot(first.(points_border), last.(points_border), ".", color="blue")
 plt.plot(first.(frac), last.(frac))
 plt.title("Quadratic koch fractal on lattice")
-plt.savefig("fractal_on_lattice.pdf")
+plt.savefig("fractal_on_lattice.png")
 plt.show()
