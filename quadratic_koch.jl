@@ -4,8 +4,11 @@ plt = PyPlot
 
 @enum Location inside outside border
 
+
 ### Possible refactoring of lattice creation
 ### Represent lattice by a normal 2D array
+
+
 ############################################################################
 function make_lattice(level, frac_points, defloc=outside)
     side_length = Int(max(first.(frac_points)...))#(4^(level) + 1)
@@ -179,6 +182,8 @@ end
 
 ### Lattice creation
 ###########################################################################
+
+
 struct Point
     x::Real
     y::Real
@@ -301,18 +306,6 @@ function is_enclosed(p::Tuple, lower, upper, frac_points, lat_const)
 end
 
 
-function determine_point_locations(frac_points, lattice_points)
-    """
-    Given all lattice point coordinates and fractal coordinates, determines wether every point is
-    inside, on or outside of the fractal
-
-    possible canidate for different method for checking points location:
-    Breadth-first search like method
-    """
-    center = lattice_points[convert(Int, round(end/2))]
-end
-
-
 function gen_lattice(frac_points)
     lat_const = 1
 
@@ -352,26 +345,65 @@ function gen_lattice(frac_points)
 end
 
 
+function determine_point_locations(frac_points, lattice_points)
+    """
+    Given all lattice point coordinates and fractal coordinates, determines wether every point is
+    inside, on or outside of the fractal
+
+    possible canidate for different method for checking points location:
+    Breadth-first search like method
+    """
+    center = lattice_points[convert(Int, round(end/2))]
+end
+
+
 ###########################################################################
 
 
 ### Executing functions
 ###########################################################################
-function make_and_plot_fractal(level)
-    println("Definging test data")
-    corners = gen_initial_square(level)
-    frac_points = gen_frac(level, corners)
-    plot_fractal(frac_points)
+
+
+function make_and_plot_fractal(level, n_between)
+    square = gen_initial_square(level, n_between)
+    frac_corners = gen_frac(level, square)
+    frac_points = fill_edges(frac_points, n_between)
+    plt.plot(first.(frac_points), last.(frac_points))
+    plt.show()
 end
 
 
-function make_and_plot_fractal_lattice(level)
-    square = gen_initial_square(level)
-    frac_points = gen_frac(level, square)
-    lattice = make_lattice(level, frac_points)
-    x, y = arrayify(lattice)
-    plt.plot(x, y, ".")
+function make_and_plot_fractal_on_lattice(level, n_between)
+    square = gen_initial_square(level, n_between)
+    frac_corners = gen_frac(level, square)
+    frac_points = fill_edges(frac_corners, n_between)
+    x_lattice, y_lattice, lattice = gen_lattice(frac_points)
+    points_inside, points_outside, points_border = get_location_points(lattice)
+
+    plt.plot(first.(points_inside), last.(points_inside), ".", color="green", label="inside")
+    plt.plot(first.(points_outside), last.(points_outside), ".", color="blue", label="outside")
+    plt.plot(first.(points_border), last.(points_border), ".", color="red", label="border")
+    plt.plot(first.(frac_points), last.(frac_points), label="fractal")
+    plt.legend()
+    #plt.savefig("quad_koch_on_lattice_level1.pdf")
     plt.show()
+end
+
+
+###########################################################################
+
+
+### functions for "exporting"
+###########################################################################
+
+
+function gen_quadkoch(level, e_fill)
+    initial_square = gen_initial_square(level, e_fill)
+    frac_corners = gen_frac(level, initial_square)
+    frac_points = fill_edges(frac_corners, e_fill)
+    x_frac, y_frac = first.(frac_points), last.(frac_points)
+    x_lattice, y_lattice, lattice = gen_lattice(frac_points)
+    return lattice, x_lattice, y_lattice, frac_points
 end
 
 
@@ -395,39 +427,15 @@ function get_location_points(lattice)
     println("#points b+i ", length(points_border) + length(points_inside))
     return points_inside, points_outside, points_border
 end
-
-
-function fractal_lattice_excec(level)
-    corners = gen_initial_square(level)
-    frac_points = gen_frac(level, corners)
-    x_frac, y_frac = first.(frac_points), last.(frac_points)
-    x_lattice, y_lattice, lattice = gen_lattice(frac_points)
-
-    points_inside, points_outside, points_border = get_location_points(lattice)
-
-    plt.plot(first.(points_inside), last.(points_inside), ".", color="green", label="inside")
-    plt.plot(first.(points_outside), last.(points_outside), ".", color="blue", label="outside")
-    plt.plot(first.(points_border), last.(points_border), ".", color="red", label="border")
-    plt.plot(x_frac, y_frac, label="fractal")
-    plt.legend()
-    #plt.savefig("quad_koch_on_lattice_level1.pdf")
-    plt.show()
-end
 ###########################################################################
 
 
-### functions for exporting
-###########################################################################
-function gen_quadkoch(level, e_fill)
-    initial_square = gen_initial_square(level, e_fill)
-    frac_corners = gen_frac(level, initial_square)
-    frac_points = fill_edges(frac_corners, e_fill)
-    x_frac, y_frac = first.(frac_points), last.(frac_points)
-    x_lattice, y_lattice, lattice = gen_lattice(frac_points)
-    return lattice, x_lattice, y_lattice, frac_points
-end
-###########################################################################
-
+#make_and_plot_fractal(2, 2)
+#make_and_plot_fractal_on_lattice(3, 2)
+"""
+lat, x, y, frac = gen_quad_koch(2,2)
+pin, pout, pbord = get_location_points(lat)
+"""
 
 
 
