@@ -1,5 +1,6 @@
 include("quadratic_koch.jl")
-using LinearAlgebra
+using SparseArrays
+using Arpack
 
 
 level = 2
@@ -12,7 +13,8 @@ N = length(points_inside)
 
 function laplacian_matrix(N, lattice, points_inside)
     println("Making laplacian matrix")
-    lap_matrix = zeros(N, N)
+    #lap_matrix = zeros(N, N)
+    lap_matrix = spzeros(N, N)
     for (idx, p) in enumerate(points_inside)
         x, y = p
         lap_matrix[idx, idx] = 4
@@ -33,14 +35,14 @@ end
 
 lap_mat = laplacian_matrix(N, lattice, points_inside)
 println("Solving EV-problem")
-eigvals, eigvecs = eigen(lap_mat)
+eigvals, eigvecs = eigs(lap_mat, nev=10)
 sorted_indices = sortperm(eigvals)
 
 grid = zeros(size(lattice, 1), size(lattice, 1), 10)
 for i in 1:10
     idx = sorted_indices[i]
     for (j, p) in enumerate(points_inside)
-        grid[Int(p[1]), Int(p[2]), i] = abs(eigvecs[:, idx][j])
+        grid[Int(p[1]), Int(p[2]), i] = abs(eigvecs[:, i][j])
     end
     plt.imshow(grid[:, :, i])
     #plt.savefig(string("eigenmode_cntr_", i, ".png"))
