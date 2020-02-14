@@ -13,7 +13,6 @@ N = length(points_inside)
 
 function laplacian_matrix(N, lattice, points_inside)
     println("Making laplacian matrix")
-    #lap_matrix = zeros(N, N)
     lap_matrix = spzeros(N, N)
     for (idx, p) in enumerate(points_inside)
         x, y = p
@@ -44,13 +43,17 @@ for i in 1:10
     for (j, p) in enumerate(points_inside)
         grid[Int(p[1]), Int(p[2]), i] = abs(eigvecs[:, i][j])
     end
+
+    
     plt.imshow(grid[:, :, i])
-    #plt.savefig(string("eigenmode_cntr_", i, ".png"))
     plt.title(string("eigenmode #", i))
+    plt.savefig(string("eigenmode_2d", i, ".png"))
     plt.show()
 
     xy = collect(1: size(lattice, 1))
     plt.surf(xy, xy, grid[:, :, i], cmap=plt.cm.coolwarm)
+    plt.title(string("eigenmode #", i))
+    plt.savefig(string("eigenmode_3d", i, ".png"))
     plt.show()
 end
 
@@ -60,5 +63,5 @@ plt.plot(first.(points_outside), last.(points_outside), ".", color="red")
 plt.plot(first.(points_border), last.(points_border), ".", color="blue")
 plt.plot(first.(frac), last.(frac))
 plt.title("Quadratic koch fractal on lattice")
-#plt.savefig("fractal_on_lattice.png")
+plt.savefig(string("fractal_on_lattice.png", level, ".png"))
 plt.show()
