@@ -34,16 +34,15 @@ end
 
 lap_mat = laplacian_matrix(N, lattice, points_inside)
 println("Solving EV-problem")
-eigvals, eigvecs = eigs(lap_mat, nev=10)
+eigvals, eigvecs = eigs(lap_mat, nev=10, which=:SM)
 sorted_indices = sortperm(eigvals)
 
 grid = zeros(size(lattice, 1), size(lattice, 1), 10)
 for i in 1:10
     idx = sorted_indices[i]
     for (j, p) in enumerate(points_inside)
-        grid[Int(p[1]), Int(p[2]), i] = abs(eigvecs[:, i][j])
+        grid[Int(p[1]), Int(p[2]), i] = eigvecs[:, i][j]
     end
-
     
     plt.imshow(grid[:, :, i])
     plt.title(string("eigenmode #", i))
