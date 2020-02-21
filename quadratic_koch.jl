@@ -2,54 +2,6 @@ import PyPlot
 plt = PyPlot
 
 
-@enum Location inside outside border
-
-
-### Possible refactoring of lattice creation
-### Represent lattice by a normal 2D array
-
-
-############################################################################
-function make_lattice(level, frac_points, defloc=outside)
-    side_length = Int(max(first.(frac_points)...))#(4^(level) + 1)
-    println(max(first.(frac_points)...))
-    println(min(first.(frac_points)...))
-    lattice = fill(defloc, (side_length, side_length))
-    for (x, y) in frac_points
-        lattice[convert(Int, x), convert(Int, y)] = border
-    end
-
-    return lattice
-end
-
-
-function arrayify(lattice)
-    """ Make arrays from lattice cartesian indices """
-    x_in = []
-    y_in = []
-    x_out = []
-    y_out = []
-    x_border = []
-    y_border = []
-    for (idx, p) in enumerate(CartesianIndices(lattice))
-        #x[idx] = p[1]
-        #y[idx] = p[2]
-        if lattice[p] == border
-            push!(x_border, p[1])
-            push!(y_border, p[2])
-        elseif lattice[p] == outside
-            push!(x_out, p[1])
-            push!(y_out, p[2])
-        else
-            push!(x_in, p[1])
-            push!(y_in, p[2])
-        end
-    end
-    return x_in, y_in, x_border, y_border, x_out, y_out
-end
-###########################################################################
-
-
 ### Generate Koch fractal
 ###########################################################################
 function generate_side(side)
@@ -184,14 +136,17 @@ end
 ###########################################################################
 
 
+
+@enum Location inside outside border
+
+
 struct Point
-    x::Real
-    y::Real
+    x::Int
+    y::Int
     location::Location
 end
 
 
-### TODO: implement, test and compare another method
 function is_enclosed(p::Tuple, lower, upper, frac_points, lat_const)
     """
     Chech if arbitrary point is inside, on or outside of fractal.
@@ -306,7 +261,8 @@ function is_enclosed(p::Tuple, lower, upper, frac_points, lat_const)
 end
 
 
-function gen_lattice(frac_points)
+function gen_lattice_ts(frac_points)
+    """ Generates lattice with the traverse method for checking points location """
     lat_const = 1
 
     x = first.(frac_points)
@@ -327,40 +283,77 @@ function gen_lattice(frac_points)
     for (i, coord) in enumerate(coords)
         lattice[Int(coord[1]), Int(coord[2])]=is_enclosed(coord, min_frac, max_frac, frac_points, lat_const)
     end
-"""
-    determined_points = []
-    for (i, coord) in enumerate(coords)
-        if !(coord in determined_points)
-            new_det_points, location = is_enclosed(coord, min_frac, max_frac, frac_points, lat_const)
-            for ndp in new_det_points
-                x, y = ndp
-                lattice[Int(x), Int(y)] = Point(x, y, location)
-            end
-            append!(determined_points, new_det_points)
-            lattice[Int(coord[1]), Int(coord[2])] = Point(coord[1], coord[2], border)
-        end
-    end
-"""
     return x_lat, y_lat, lattice
 end
 
 
-function determine_point_locations(frac_points, lattice_points)
+function gen_lattice_points(frac_points)
+    """ Generates the coordinates of the lattice points """
+    lat_const = 1
+    x = first.(frac_points)
+    y = last.(frac_points)
+    min_frac = min(x...)
+    max_frac = max(x...)
+
+    lattice_vals = collect(min_frac:lat_const:max_frac)
+    L_lat = size(lattice_vals, 1)
+    x_lat = transpose(repeat(lattice_vals, 1, L_lat))
+    y_lat = repeat(lattice_vals, 1, L_lat)
+    lat_size = size(x_lat, 1) * size(x_lat, 2)
+    lattice_points = collect(zip(x_lat, y_lat)) # List of coordinates as tuples
+
+    return x_lat, y_lat, lattice_points
+end
+
+
+function gen_lattice_bfs(frac_points, lattice_points)
     """
+    Determines locations and creates lattice    
+
     Given all lattice point coordinates and fractal coordinates, determines wether every point is
     inside, on or outside of the fractal
 
-    possible canidate for different method for checking points location:
     Breadth-first search like method
     """
+    N = size(lattice_points, 1)
+    #lattice = Array{Point}(undef, (N, N))
+    lattice = fill(Point(0, 0, outside), (N, N))
+
     center = lattice_points[convert(Int, round(end/2))]
+    x0, y0 = center
+    lattice[Int(x0), Int(y0)] = Point(x0, y0, inside)
+    # neares neighbours of center
+    left = (x0 - 1, y0)
+    right = (x0 + 1, y0)
+    down = (x0, y0 - 1)
+    up = (x0, y0 + 1)
+
+    
+    points = [left, right, down, up]
+
+    println("Starting search")
+    for point in points
+        x, y = point
+        if !((x, y) in frac_points) && lattice[Int(x), Int(y)] == Point(0, 0, outside)
+            # New inside point
+            lattice[Int(x), Int(y)] = Point(x, y, inside)
+
+            for nn in (-1, 1)
+                    push!(points, (x + nn, y))
+                    push!(points, (x, y + nn))
+           end
+        elseif (x, y) in frac_points
+            lattice[Int(x), Int(y)] = Point(x, y, border)
+        end
+    end
+    return lattice
 end
 
 
 ###########################################################################
 
 
-### Executing functions
+### Functions for testing and plotting
 ###########################################################################
 
 
@@ -377,7 +370,11 @@ function make_and_plot_fractal_on_lattice(level, n_between)
     square = gen_initial_square(level, n_between)
     frac_corners = gen_frac(level, square)
     frac_points = fill_edges(frac_corners, n_between)
-    x_lattice, y_lattice, lattice = gen_lattice(frac_points)
+    #x_lattice, y_lattice, lattice = gen_lattice(frac_points)
+    #points_inside, points_outside, points_border = get_location_points(lattice)
+
+    x_lat, y_lat, lattice_points = gen_lattice_points(frac_points)
+    lattice = gen_lattice_bfs(frac_points, lattice_points)
     points_inside, points_outside, points_border = get_location_points(lattice)
 
     plt.plot(first.(points_inside), last.(points_inside), ".", color="green", label="inside")
@@ -401,8 +398,8 @@ function gen_quadkoch(level, e_fill)
     initial_square = gen_initial_square(level, e_fill)
     frac_corners = gen_frac(level, initial_square)
     frac_points = fill_edges(frac_corners, e_fill)
-    x_frac, y_frac = first.(frac_points), last.(frac_points)
-    x_lattice, y_lattice, lattice = gen_lattice(frac_points)
+    x_lattice, y_lattice, lattice_points = gen_lattice_points(frac_points)
+    lattice = gen_lattice_bfs(frac_points, lattice_points)
     return lattice, x_lattice, y_lattice, frac_points
 end
 
@@ -431,59 +428,54 @@ end
 
 
 #make_and_plot_fractal(2, 2)
-#make_and_plot_fractal_on_lattice(3, 2)
+make_and_plot_fractal_on_lattice(2, 1)
+
+
+
+
+
+############################################################################
+### Possible refactoring of lattice creation
+### Represent lattice by a normal 2D array
+############################################################################
 """
-lat, x, y, frac = gen_quad_koch(2,2)
-pin, pout, pbord = get_location_points(lat)
+function make_lattice(level, frac_points, defloc=outside)
+    side_length = Int(max(first.(frac_points)...))#(4^(level) + 1)
+    println(max(first.(frac_points)...))
+    println(min(first.(frac_points)...))
+    lattice = fill(defloc, (side_length, side_length))
+    for (x, y) in frac_points
+        lattice[convert(Int, x), convert(Int, y)] = border
+    end
+
+    return lattice
+end
+
+
+function arrayify(lattice)
+    x_in = []
+    y_in = []
+    x_out = []
+    y_out = []
+    x_border = []
+    y_border = []
+    for (idx, p) in enumerate(CartesianIndices(lattice))
+        #x[idx] = p[1]
+        #y[idx] = p[2]
+        if lattice[p] == border
+            push!(x_border, p[1])
+            push!(y_border, p[2])
+        elseif lattice[p] == outside
+            push!(x_out, p[1])
+            push!(y_out, p[2])
+        else
+            push!(x_in, p[1])
+            push!(y_in, p[2])
+        end
+    end
+    return x_in, y_in, x_border, y_border, x_out, y_out
+end
 """
+###########################################################################
 
-
-
-"""
-level = 1
-square = gen_initial_square(level, 2)
-frac_points = gen_frac(level, square)
-x = first.(frac_points)
-y = last.(frac_points)
-
-ep = fill_edges(frac_points, 2)
-x, y, lattice = gen_lattice(ep)
-points_inside, points_outside, points_border = get_location_points(lattice)
-xe = first.(ep)
-ye = last.(ep)
-
-
-#plt.plot(x, y, ".")
-#plt.plot(xe, ye, ".")
-plt.plot(first.(points_inside), last.(points_inside), ".", color="green", label="inside")
-plt.plot(first.(points_outside), last.(points_outside), ".", color="blue", label="outside")
-plt.plot(first.(points_border), last.(points_border), ".", color="red", label="border")
-plt.legend()
-#plt.savefig("quad_koch_on_lattice_level1.pdf")
-plt.show()
-
-"""
-
-
-"""
-level = 2
-lattice, x_lat, y_lat, frac = gen_quadkoch(level)
-points_in, xi, yi, xo, yo, xb, yb = get_location_points(lattice)
-"""
-
-
-
-"""
-level = 1
-corners = gen_initial_square(level)
-frac_points = gen_frac(level, corners)
-lattice = make_lattice(level, frac_points)
-
-x_in, y_in, x_border, y_border, x_out, y_out = arrayify(lattice)
-
-plt.plot(x_border, y_border, ".")
-plt.plot(x_in, y_in, ".")
-plt.plot(x_out, y_out, ".")
-plt.show()
-"""
 

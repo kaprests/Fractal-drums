@@ -3,8 +3,8 @@ using SparseArrays
 using Arpack
 
 
-level = 2
-lpps = 4
+level = 3
+lpps = 1
 lattice, x_lat, y_lat, frac = gen_quadkoch(level, lpps)
 points_inside, points_outside, points_border= get_location_points(lattice)
 
@@ -45,22 +45,24 @@ for i in 1:10
     end
     
     plt.imshow(grid[:, :, i])
+    #plt.plot(first.(frac), last.(frac))
     plt.title(string("eigenmode #", i))
-    plt.savefig(string("eigenmode_2d", i, ".png"))
+    plt.#savefig(string("eigenmode_2d", i, ".png"))
     plt.show()
 
     xy = collect(1: size(lattice, 1))
     plt.surf(xy, xy, grid[:, :, i], cmap=plt.cm.coolwarm)
     plt.title(string("eigenmode #", i))
-    plt.savefig(string("eigenmode_3d", i, ".png"))
+    plt.#savefig(string("eigenmode_3d", i, ".png"))
     plt.show()
 end
 
-println("Plotting")
+"""
 plt.plot(first.(points_inside), last.(points_inside), ".", color="green")
 plt.plot(first.(points_outside), last.(points_outside), ".", color="red")
 plt.plot(first.(points_border), last.(points_border), ".", color="blue")
 plt.plot(first.(frac), last.(frac))
 plt.title("Quadratic koch fractal on lattice")
-plt.savefig(string("fractal_on_lattice.png", level, ".png"))
+plt.#savefig(string("fractal_on_lattice.png", level, ".png"))
 plt.show()
+"""
