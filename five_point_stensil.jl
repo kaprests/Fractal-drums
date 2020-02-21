@@ -3,8 +3,8 @@ using SparseArrays
 using Arpack
 
 
-level = 3
-lpps = 1
+level = 4
+lpps = 0
 lattice, x_lat, y_lat, frac = gen_quadkoch(level, lpps)
 points_inside, points_outside, points_border= get_location_points(lattice)
 
@@ -41,19 +41,18 @@ grid = zeros(size(lattice, 1), size(lattice, 1), 10)
 for i in 1:10
     idx = sorted_indices[i]
     for (j, p) in enumerate(points_inside)
-        grid[Int(p[1]), Int(p[2]), i] = eigvecs[:, i][j]
+        grid[p[1], p[2], i] = eigvecs[:, i][j]
     end
     
     plt.imshow(grid[:, :, i])
-    #plt.plot(first.(frac), last.(frac))
-    plt.title(string("eigenmode #", i))
-    plt.#savefig(string("eigenmode_2d", i, ".png"))
+    plt.title(string("eigenmode #", i, ", fractal level: ", level, ", lpps: ", lpps))
+    plt.savefig(string("eigenmode_2d", i, ".png"))
     plt.show()
 
     xy = collect(1: size(lattice, 1))
     plt.surf(xy, xy, grid[:, :, i], cmap=plt.cm.coolwarm)
-    plt.title(string("eigenmode #", i))
-    plt.#savefig(string("eigenmode_3d", i, ".png"))
+    plt.title(string("eigenmode #", i, ", fractal level: ", level, ", lpps: ", lpps))
+    plt.savefig(string("eigenmode_3d", i, ".png"))
     plt.show()
 end
 

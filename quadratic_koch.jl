@@ -320,8 +320,8 @@ function gen_lattice_bfs(frac_points, lattice_points)
     lattice = fill(Point(0, 0, outside), (N, N))
 
     center = lattice_points[convert(Int, round(end/2))]
-    x0, y0 = center
-    lattice[Int(x0), Int(y0)] = Point(x0, y0, inside)
+    x0, y0 = Int(center[1]), Int(center[2])
+    lattice[x0, y0] = Point(x0, y0, inside)
     # neares neighbours of center
     left = (x0 - 1, y0)
     right = (x0 + 1, y0)
@@ -334,16 +334,16 @@ function gen_lattice_bfs(frac_points, lattice_points)
     println("Starting search")
     for point in points
         x, y = point
-        if !((x, y) in frac_points) && lattice[Int(x), Int(y)] == Point(0, 0, outside)
+        if !((x, y) in frac_points) && lattice[x, y] == Point(0, 0, outside)
             # New inside point
-            lattice[Int(x), Int(y)] = Point(x, y, inside)
+            lattice[x, y] = Point(x, y, inside)
 
             for nn in (-1, 1)
                     push!(points, (x + nn, y))
                     push!(points, (x, y + nn))
            end
         elseif (x, y) in frac_points
-            lattice[Int(x), Int(y)] = Point(x, y, border)
+            lattice[x, y] = Point(x, y, border)
         end
     end
     return lattice
@@ -428,7 +428,7 @@ end
 
 
 #make_and_plot_fractal(2, 2)
-make_and_plot_fractal_on_lattice(2, 1)
+#make_and_plot_fractal_on_lattice(2, 1)
 
 
 
