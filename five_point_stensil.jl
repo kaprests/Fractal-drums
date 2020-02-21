@@ -5,8 +5,9 @@ using Arpack
 
 level = 4
 lpps = 0
-lattice, x_lat, y_lat, frac = gen_quadkoch(level, lpps)
-points_inside, points_outside, points_border= get_location_points(lattice)
+lattice, frac = gen_quadkoch(level, lpps)
+points_inside, points_outside, points_border= arrayify(lattice)
+
 
 N = length(points_inside)
 
@@ -46,13 +47,13 @@ for i in 1:10
     
     plt.imshow(grid[:, :, i])
     plt.title(string("eigenmode #", i, ", fractal level: ", level, ", lpps: ", lpps))
-    plt.savefig(string("eigenmode_2d", i, ".png"))
+    #plt.savefig(string("eigenmode_2d", i, ".png"))
     plt.show()
 
     xy = collect(1: size(lattice, 1))
     plt.surf(xy, xy, grid[:, :, i], cmap=plt.cm.coolwarm)
     plt.title(string("eigenmode #", i, ", fractal level: ", level, ", lpps: ", lpps))
-    plt.savefig(string("eigenmode_3d", i, ".png"))
+    #plt.savefig(string("eigenmode_3d", i, ".png"))
     plt.show()
 end
 
