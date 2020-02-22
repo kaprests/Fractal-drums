@@ -3,6 +3,16 @@
 ############################################################################
 
 
+@enum Location INSIDE OUTSIDE BORDER
+
+
+struct Point
+    x::Int
+    y::Int
+    location::Location
+end
+
+
 function is_enclosed(p::Tuple, lower, upper, frac_points, lat_const)
     """
     Chech if arbitrary point is INSIDE, on or OUTSIDE of fractal.

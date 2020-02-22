@@ -109,7 +109,6 @@ function fill_edges(frac_corners, n_between)
     n_tot = n_corners + n_fill
     frac_points = Array{Tuple}(undef, n_tot)
 
-    counter = 1
     for i in 1:n_corners
         x1, y1 = frac_corners[i]
         x2, y2 = frac_corners[1]

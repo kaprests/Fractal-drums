@@ -3,6 +3,9 @@
 ###############################################################
 
 
+@enum Location INSIDE OUTSIDE BORDER
+
+
 function make_lattice(frac_points)
     x = first.(frac_points)
     N = Int(max(x...))

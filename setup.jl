@@ -2,14 +2,6 @@ include("quadratic_koch.jl")
 include("lattice_bfs.jl")
 include("lattice_traverse.jl")
 
-@enum Location INSIDE OUTSIDE BORDER
-
-struct Point
-    x::Int
-    y::Int
-    location::Location
-end
-
 
 #################################
 ### functions for "exporting" ###
@@ -25,9 +17,9 @@ function gen_quadkoch(level, e_fill)
 end
 
 
-#################
-### plottingi ###
-#################
+################
+### plotting ###
+################
 
 
 function make_and_plot_fractal(level, n_between)

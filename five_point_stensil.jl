@@ -10,11 +10,11 @@ function laplacian_matrix(N, lattice, points_inside)
         x, y = p
         lap_matrix[idx, idx] = 4
         for nn in (-1, 1)
-            if (x+nn, y) in points_inside
+            if lattice[x+nn, y] == INSIDE
                 nn_idx = findfirst(p -> p== (x+nn, y), points_inside)
                 lap_matrix[idx, nn_idx] = -1
             end
-            if (x, y+nn) in points_inside
+            if lattice[x, y+nn] == INSIDE
                 nn_idx = findfirst(p -> p== (x, y+nn), points_inside)
                 lap_matrix[idx, nn_idx] = -1
             end
@@ -25,12 +25,25 @@ end
 
 
 if PROGRAM_FILE == basename(@__FILE__)
-    level = 3
-    lpps = 0
+    level = 2
+    lpps = 2
+
+    if length(ARGS) >= 1
+        level = parse(Int, ARGS[1])
+    else
+        println("No argument provided, using default level=3")
+    end
+
+    if length(ARGS) >= 2
+        lpps = parse(Int, ARGS[2])
+    else
+        println("No argument provided, using default lpps=0")
+    end
+
+
     lattice, frac = gen_quadkoch(level, lpps)
     points_inside, points_outside, points_border= arrayify(lattice)
     N = length(points_inside)
-
 
     lap_mat = laplacian_matrix(N, lattice, points_inside)
     println("Solving EV-problem")
@@ -38,19 +51,36 @@ if PROGRAM_FILE == basename(@__FILE__)
     sorted_indices = sortperm(eigvals)
 
     grid = zeros(size(lattice, 1), size(lattice, 1), 10)
+    #surf_grid = Array{Float64, 3}(undef, (size(lattice, 1), size(lattice, 1), 10))
+    surf_grid = fill(NaN, (size(lattice, 1), size(lattice, 1), 10))
     for i in 1:10
         idx = sorted_indices[i]
         for (j, p) in enumerate(points_inside)
             grid[p[1], p[2], i] = eigvecs[:, i][j]
+            surf_grid[p[1], p[2], i] = eigvecs[:, i][j]
+        end
+
+        for (j, p) in enumerate(points_border)
+            surf_grid[p[1], p[2], i] = 0
         end
         
-        plt.imshow(grid[:, :, i])
+        plt.imshow(transpose(grid[:, :, i]), origin="upper")
+        plt.plot(first.(frac) .- 1 , last.(frac) .- 1)
         plt.title(string("eigenmode #", i, ", fractal level: ", level, ", lpps: ", lpps))
-        #plt.savefig(string("eigenmode_2d", i, ".png"))
+        plt.savefig(string("eigenmode_2d", i, ".png"))
         plt.show()
 
         xy = collect(1: size(lattice, 1))
-        plt.surf(xy, xy, grid[:, :, i], cmap=plt.cm.coolwarm)
+        if length(ARGS) >= 3
+            if ARGS[3] == "wire"
+                plt.plot_wireframe(xy, xy, transpose(surf_grid[:, :, i] ./ 10), color="gray")
+                plt.plot(first.(frac) , last.(frac), color="red")
+            else
+                plt.surf(grid[:, :, i], cmap=plt.cm.coolwarm, alpha=1)
+            end
+        else
+            plt.surf(grid[:, :, i], cmap=plt.cm.coolwarm, alpha=1)
+        end
         plt.title(string("eigenmode #", i, ", fractal level: ", level, ", lpps: ", lpps))
         #plt.savefig(string("eigenmode_3d", i, ".png"))
         plt.show()
