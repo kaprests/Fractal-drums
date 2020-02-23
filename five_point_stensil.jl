@@ -1,4 +1,5 @@
 include("setup.jl")
+include("del_dos_regression.jl")
 using SparseArrays
 using Arpack
 
@@ -25,23 +26,30 @@ end
 
 
 if PROGRAM_FILE == basename(@__FILE__)
-    level = 2
-    lpps = 2
+    ######################################
+    ### Ser parameters, LEVEL and LPPS ###
+    ######################################
+
+    LEVEL = 2
+    LPPS = 2
 
     if length(ARGS) >= 1
-        level = parse(Int, ARGS[1])
+        LEVEL = parse(Int, ARGS[1])
     else
-        println("No argument provided, using default level=3")
+        println("No argument provided, using default LEVEL=3")
     end
 
     if length(ARGS) >= 2
-        lpps = parse(Int, ARGS[2])
+        LPPS = parse(Int, ARGS[2])
     else
-        println("No argument provided, using default lpps=0")
+        println("No argument provided, using default LPPS=0")
     end
 
+    ###########################################################
+    ### Make lattice, laplacian matrix and solce EV-problem ###
+    ###########################################################
 
-    lattice, frac = gen_quadkoch(level, lpps)
+    lattice, frac = gen_quadkoch(LEVEL, LPPS)
     points_inside, points_outside, points_border= arrayify(lattice)
     N = length(points_inside)
 
@@ -53,6 +61,21 @@ if PROGRAM_FILE == basename(@__FILE__)
     grid = zeros(size(lattice, 1), size(lattice, 1), 10)
     #surf_grid = Array{Float64, 3}(undef, (size(lattice, 1), size(lattice, 1), 10))
     surf_grid = fill(NaN, (size(lattice, 1), size(lattice, 1), 10))
+
+    ###########
+    ### DOS ###
+    ###########
+
+"""
+    fit = deldos_fit(sort(eigvals))
+    a, d = fit.coefs[1], fit.coefs[2]
+"""
+
+    ####################
+    ### Plot results ###
+    ####################
+
+    println("PLotting")
     for i in 1:10
         idx = sorted_indices[i]
         for (j, p) in enumerate(points_inside)
@@ -66,8 +89,8 @@ if PROGRAM_FILE == basename(@__FILE__)
         
         plt.imshow(transpose(grid[:, :, i]), origin="upper")
         plt.plot(first.(frac) .- 1 , last.(frac) .- 1)
-        plt.title(string("eigenmode #", i, ", fractal level: ", level, ", lpps: ", lpps))
-        plt.savefig(string("eigenmode_2d", i, ".png"))
+        plt.title(string("eigenmode #", i, ", fractal LEVEL: ", LEVEL, ", LPPS: ", LPPS))
+        #plt.savefig(string("eigenmode_2d", i, ".png"))
         plt.show()
 
         xy = collect(1: size(lattice, 1))
@@ -81,7 +104,7 @@ if PROGRAM_FILE == basename(@__FILE__)
         else
             plt.surf(grid[:, :, i], cmap=plt.cm.coolwarm, alpha=1)
         end
-        plt.title(string("eigenmode #", i, ", fractal level: ", level, ", lpps: ", lpps))
+        plt.title(string("eigenmode #", i, ", fractal LEVEL: ", LEVEL, ", LPPS: ", LPPS))
         #plt.savefig(string("eigenmode_3d", i, ".png"))
         plt.show()
     end
