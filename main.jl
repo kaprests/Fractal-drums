@@ -11,8 +11,8 @@ if PROGRAM_FILE == basename(@__FILE__)
     ### Ser parameters, LEVEL and LPPS ###
     ######################################
 
-    LEVEL = 2
-    LPPS = 2
+    LEVEL = 3
+    LPPS = 0
 
     if length(ARGS) >= 1
         LEVEL = parse(Int, ARGS[1])
@@ -54,9 +54,15 @@ if PROGRAM_FILE == basename(@__FILE__)
     ### DOS ###
     ###########
 
+    delta_N(eigvals, LEVEL)
 """
-    fit = deldos_fit(sort(eigvals))
-    a, d = fit.coefs[1], fit.coefs[2]
+    fit = deldos_fit(sort(eigvals), LEVEL)
+    try
+        fit = deldos_fit(sort(eigvals))
+        #a, d = fit.coefs[1], fit.coefs[2]
+    catch
+        println("BOO")
+    end
 """
 
     ####################

@@ -14,6 +14,8 @@ function nine_point_laplacian(N, lattice, points_inside)
                     lap_matrix[idx, nn_idx] = -1/3
                 end
             catch
+                # Ends up here of neares neighbour is outside the fractal
+                continue
             end
 
             try
@@ -22,6 +24,8 @@ function nine_point_laplacian(N, lattice, points_inside)
                 lap_matrix[idx, nn_idx] = -1/3
             end
             catch
+                # Ends up here of neares neighbour is outside the fractal
+                continue
             end
         end
     end 
