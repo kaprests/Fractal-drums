@@ -4,46 +4,33 @@
 using CurveFit
 
 """
-    Don't think I have understood this. Both function yield weird results.
+    Don't think I have understood this.
 """
 
-function get_N(omg, eigvals)
-    return length(eigvals[eigvals. < omg])
-end
 
+function delta_N(eigvals, level, lpps)
+    aomegas = sqrt.(eigvals)
 
-function delta_N(eigvals, level)
-    frac_area = 4^(2*(level-1))
-    #IDOS = zeros(length(eigvals))
-    IDOS = collect(1:1:length(eigvals))
-    @assert(length(IDOS) == length(eigvals))
-    delta_IDOS = (frac_area/(4*pi))* (eigvals .^ 2) - IDOS
-    plt.plot(eigvals, delta_IDOS)
-    plt.show()
-end
+    println("")
+    println("")
 
+    frac_area = (4^(2*(level-1)))*4*(lpps+1)^2
+    delta_N = zeros(length(aomegas))
 
-function deldos_fit(eigvals, level)
-    """ Estimates d, assumes sorted eigenvalues """
-    min_eigval = eigvals[1]
-    max_eigval = eigvals[end]
-    interval = (max_eigval - min_eigval)/100
-    aomegas = collect(min_eigval:interval:max_eigval)
-    Ns = zeros(length(aomegas))
-
-    for (idx, aomg) in enumerate(aomegas)
-        Ns[idx] = length(eigvals[eigvals .< aomg])
+    for (idx, val) in enumerate(aomegas)
+        delta_N[idx] = frac_area*val/(4*pi) - length(aomegas[aomegas .< val])
+        println(val)
     end
 
-    area = 4^(2*(level-1))
-    del_dos = (area/(4*pi))*aomegas.^2 - Ns
-    #fit = curve_fit(PowerFit, aomegas, del_dos)
-    fit = "TEHEE"
-    print("a*omega^d, a and d are: ", fit)
-    plt.plot(aomegas, del_dos, label="d_dos")
-    plt.plot(aomegas, Ns, label="Ns")
-    plt.plot(aomegas, aomegas.^(3/2), label="lol")
-    plt.legend()
+
+    fit = curve_fit(PowerFit, aomegas, delta_N)
+    println("Estimate for d: ", fit.coefs[2])
+
+
+    plt.plot(aomegas, delta_N, ".")
+    plt.plot(aomegas, fit.(aomegas))
+    #plt.plot(aomegas, eigvals, ".")
     plt.show()
-    return fit
 end
+
+

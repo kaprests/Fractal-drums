@@ -12,7 +12,7 @@ if PROGRAM_FILE == basename(@__FILE__)
     ######################################
 
     LEVEL = 3
-    LPPS = 0
+    LPPS = 1
 
     if length(ARGS) >= 1
         LEVEL = parse(Int, ARGS[1])
@@ -23,7 +23,7 @@ if PROGRAM_FILE == basename(@__FILE__)
     if length(ARGS) >= 2
         LPPS = parse(Int, ARGS[2])
     else
-        println("No argument provided, using default LPPS=0")
+        println("No argument provided, using default LPPS=1")
     end
 
     ###########################################################
@@ -34,11 +34,12 @@ if PROGRAM_FILE == basename(@__FILE__)
     points_inside, points_outside, points_border= arrayify(lattice)
     N = length(points_inside)
 
-    #lap_mat = five_point_laplacian(N, lattice, points_inside)
-    lap_mat = nine_point_laplacian(N, lattice, points_inside)
+    lap_mat = five_point_laplacian(N, lattice, points_inside)
+    #lap_mat = nine_point_laplacian(N, lattice, points_inside)
 
     println("Solving EV-problem")
-    eigvals, eigvecs = eigs(lap_mat, nev=10, which=:SM)
+    eigvals_many, eigvecs = eigs(lap_mat, nev=40, which=:SM)
+    eigvals = eigvals_many[1:10]
     sorted_indices = sortperm(eigvals)
 
     grid = zeros(size(lattice, 1), size(lattice, 1), 10)
@@ -54,21 +55,16 @@ if PROGRAM_FILE == basename(@__FILE__)
     ### DOS ###
     ###########
 
-    delta_N(eigvals, LEVEL)
-"""
-    fit = deldos_fit(sort(eigvals), LEVEL)
-    try
-        fit = deldos_fit(sort(eigvals))
-        #a, d = fit.coefs[1], fit.coefs[2]
-    catch
-        println("BOO")
-    end
-"""
+    println("")
+    println("")
+    println("")
+    delta_N(eigvals_many, LEVEL, LPPS)
 
     ####################
     ### Plot results ###
     ####################
 
+"""
     println("PLotting")
     for i in 1:10
         idx = sorted_indices[i]
@@ -88,20 +84,22 @@ if PROGRAM_FILE == basename(@__FILE__)
         plt.show()
 
         xy = collect(1: size(lattice, 1))
+        plt.title(string("eigenmode #", i, ", fractal LEVEL: ", LEVEL, ", LPPS: ", LPPS))
         if length(ARGS) >= 3
             if ARGS[3] == "wire"
                 plt.plot_wireframe(xy, xy, transpose(surf_grid[:, :, i] ./ 10), color="gray")
                 plt.plot(first.(frac) , last.(frac), color="red")
+                plt.savefig(string("eigenmode_3d_wireframe", i, ".png"))
             else
                 plt.surf(grid[:, :, i], cmap=plt.cm.coolwarm, alpha=1)
             end
         else
             plt.surf(grid[:, :, i], cmap=plt.cm.coolwarm, alpha=1)
         end
-        plt.title(string("eigenmode #", i, ", fractal LEVEL: ", LEVEL, ", LPPS: ", LPPS))
         #plt.savefig(string("eigenmode_3d", i, ".png"))
         plt.show()
     end
+"""
 end
 
 
