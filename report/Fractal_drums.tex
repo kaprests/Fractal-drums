@@ -16,8 +16,12 @@
 \maketitle
 
 \section{Abstract}
-A numerical study of vibrations of quadratic Koch fractal shaped drums. For any drum, it's size is related to the pitch it makes, the larger the area, the lower the pitch. The question in mind now, is if the shape of the drum also affects the tone, and this study computes the eigenstates of a fractal drum with finite differences. The resulting resulting density of states is compared with the findings of the Weyl-Berry-conjecture and results for a drum with continous perimeter of the same
-area.
+A numerical study of vibrations of fractal shaped drums. The 10 lowest vibration eigenmodes for a drum with a   fractal shaped boundary were computed using finite diferences, and the scaling of the integrated density of states were compared with the Weyl-conjecture and results for drums with smooth boundary.
+
+\section{Introduction}
+For any drum, it's size is related to the pitch of the sound it makes, and the larger the area, the lower the pitch. The question in mind for this study, is if the shape of the drum also affects the tone so that information about the drum's shape can be inferred from the tone, and this study spesifically studied drums shaped like quadratic Koch fractals.
+
+The study was carried out numerically, and program code for generating the fractal and a system lattice, representing the drums boundary and skin respectively, were written. The eigenmodes of the drums vibration were then computed with finite differences, and to see if the Weyl-conjecture could could be used to infer information about the fractal boundary, the integrated density of states of the fractal drum were compared to that of a drum with smooth boundary and same area.
 
 \section{Theory}
 \subsection{The Weyl-conjecture}
@@ -36,7 +40,7 @@ where $N(\omega)$ is the integrated density of states (IDOS), i.e. the number of
 in the limit of large $\omega$. Equation \ref{weyl-conjecture} is the Weyl-conjecture for the IDOS, and is proven correct under the assumption of a smooth boundary. This study tries to see what happens when the boundary is fractal.
 
 \subsection{Quadratic Koch Fractal}
-Describe qkf, recursive generation etc.
+The quadratic koch fractal 
 
 \subsection{Finite Difference Approximation}
 Five-point and nine-point stensil. Equations...

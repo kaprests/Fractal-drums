@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=pdflatex 2020.2.11)  23 FEB 2020 21:01
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=pdflatex 2020.2.11)  24 FEB 2020 08:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -247,163 +247,162 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 16.
 
 (/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-<../figs/eigenmode_2d1.png, id=1, 462.528pt x 346.896pt>
+) [1
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+<../figs/eigenmode_2d1.png, id=12, 462.528pt x 346.896pt>
 File: ../figs/eigenmode_2d1.png Graphic file (type png)
 <use ../figs/eigenmode_2d1.png>
-Package pdftex.def Info: ../figs/eigenmode_2d1.png  used on input line 52.
+Package pdftex.def Info: ../figs/eigenmode_2d1.png  used on input line 56.
 (pdftex.def)             Requested size: 150.14671pt x 112.60753pt.
-<../figs/eigenmode_2d2.png, id=3, 462.528pt x 346.896pt>
+<../figs/eigenmode_2d2.png, id=14, 462.528pt x 346.896pt>
 File: ../figs/eigenmode_2d2.png Graphic file (type png)
 <use ../figs/eigenmode_2d2.png>
-Package pdftex.def Info: ../figs/eigenmode_2d2.png  used on input line 55.
+Package pdftex.def Info: ../figs/eigenmode_2d2.png  used on input line 59.
 (pdftex.def)             Requested size: 150.14671pt x 112.60753pt.
-<../figs/eigenmode_2d3.png, id=4, 462.528pt x 346.896pt>
+<../figs/eigenmode_2d3.png, id=15, 462.528pt x 346.896pt>
 File: ../figs/eigenmode_2d3.png Graphic file (type png)
 <use ../figs/eigenmode_2d3.png>
-Package pdftex.def Info: ../figs/eigenmode_2d3.png  used on input line 58.
+Package pdftex.def Info: ../figs/eigenmode_2d3.png  used on input line 62.
 (pdftex.def)             Requested size: 150.14671pt x 112.60753pt.
-<../figs/eigenmode_2d4.png, id=5, 462.528pt x 346.896pt>
+<../figs/eigenmode_2d4.png, id=16, 462.528pt x 346.896pt>
 File: ../figs/eigenmode_2d4.png Graphic file (type png)
 <use ../figs/eigenmode_2d4.png>
-Package pdftex.def Info: ../figs/eigenmode_2d4.png  used on input line 61.
+Package pdftex.def Info: ../figs/eigenmode_2d4.png  used on input line 65.
 (pdftex.def)             Requested size: 150.14671pt x 112.60753pt.
-<../figs/eigenmode_2d5.png, id=6, 462.528pt x 346.896pt>
+<../figs/eigenmode_2d5.png, id=17, 462.528pt x 346.896pt>
 File: ../figs/eigenmode_2d5.png Graphic file (type png)
 <use ../figs/eigenmode_2d5.png>
-Package pdftex.def Info: ../figs/eigenmode_2d5.png  used on input line 64.
+Package pdftex.def Info: ../figs/eigenmode_2d5.png  used on input line 68.
 (pdftex.def)             Requested size: 150.14671pt x 112.60753pt.
-<../figs/eigenmode_2d6.png, id=7, 462.528pt x 346.896pt>
+<../figs/eigenmode_2d6.png, id=18, 462.528pt x 346.896pt>
 File: ../figs/eigenmode_2d6.png Graphic file (type png)
 <use ../figs/eigenmode_2d6.png>
-Package pdftex.def Info: ../figs/eigenmode_2d6.png  used on input line 67.
+Package pdftex.def Info: ../figs/eigenmode_2d6.png  used on input line 71.
 (pdftex.def)             Requested size: 150.14671pt x 112.60753pt.
-<../figs/eigenmode_2d7.png, id=8, 462.528pt x 346.896pt>
+<../figs/eigenmode_2d7.png, id=19, 462.528pt x 346.896pt>
 File: ../figs/eigenmode_2d7.png Graphic file (type png)
 <use ../figs/eigenmode_2d7.png>
-Package pdftex.def Info: ../figs/eigenmode_2d7.png  used on input line 70.
+Package pdftex.def Info: ../figs/eigenmode_2d7.png  used on input line 74.
 (pdftex.def)             Requested size: 150.14671pt x 112.60753pt.
-<../figs/eigenmode_2d8.png, id=9, 462.528pt x 346.896pt>
+<../figs/eigenmode_2d8.png, id=20, 462.528pt x 346.896pt>
 File: ../figs/eigenmode_2d8.png Graphic file (type png)
 <use ../figs/eigenmode_2d8.png>
-Package pdftex.def Info: ../figs/eigenmode_2d8.png  used on input line 73.
+Package pdftex.def Info: ../figs/eigenmode_2d8.png  used on input line 77.
 (pdftex.def)             Requested size: 150.14671pt x 112.60753pt.
-<../figs/eigenmode_2d9.png, id=10, 462.528pt x 346.896pt>
+<../figs/eigenmode_2d9.png, id=21, 462.528pt x 346.896pt>
 File: ../figs/eigenmode_2d9.png Graphic file (type png)
 <use ../figs/eigenmode_2d9.png>
-Package pdftex.def Info: ../figs/eigenmode_2d9.png  used on input line 76.
+Package pdftex.def Info: ../figs/eigenmode_2d9.png  used on input line 80.
 (pdftex.def)             Requested size: 150.14671pt x 112.60753pt.
-<../figs/eigenmode_2d10.png, id=11, 462.528pt x 346.896pt>
+<../figs/eigenmode_2d10.png, id=22, 462.528pt x 346.896pt>
 File: ../figs/eigenmode_2d10.png Graphic file (type png)
 <use ../figs/eigenmode_2d10.png>
-Package pdftex.def Info: ../figs/eigenmode_2d10.png  used on input line 79.
+Package pdftex.def Info: ../figs/eigenmode_2d10.png  used on input line 83.
 (pdftex.def)             Requested size: 150.14671pt x 112.60753pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 51--81
+Underfull \hbox (badness 10000) in paragraph at lines 55--85
 []$[]$ $[]$ $[]$
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 51--81
+Underfull \hbox (badness 10000) in paragraph at lines 55--85
 []$ $[]$ $[]$
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 51--81
+Underfull \hbox (badness 10000) in paragraph at lines 55--85
 []$ $[]$ $[]$
  []
 
-<../figs/eigenmode_3d1.png, id=12, 462.528pt x 346.896pt>
+<../figs/eigenmode_3d1.png, id=23, 462.528pt x 346.896pt>
 File: ../figs/eigenmode_3d1.png Graphic file (type png)
 <use ../figs/eigenmode_3d1.png>
-Package pdftex.def Info: ../figs/eigenmode_3d1.png  used on input line 87.
+Package pdftex.def Info: ../figs/eigenmode_3d1.png  used on input line 91.
 (pdftex.def)             Requested size: 150.14671pt x 112.60753pt.
-<../figs/eigenmode_3d2.png, id=13, 462.528pt x 346.896pt>
+<../figs/eigenmode_3d2.png, id=24, 462.528pt x 346.896pt>
 File: ../figs/eigenmode_3d2.png Graphic file (type png)
 <use ../figs/eigenmode_3d2.png>
-Package pdftex.def Info: ../figs/eigenmode_3d2.png  used on input line 90.
+Package pdftex.def Info: ../figs/eigenmode_3d2.png  used on input line 94.
 (pdftex.def)             Requested size: 150.14671pt x 112.60753pt.
-<../figs/eigenmode_3d3.png, id=14, 462.528pt x 346.896pt>
+<../figs/eigenmode_3d3.png, id=25, 462.528pt x 346.896pt>
 File: ../figs/eigenmode_3d3.png Graphic file (type png)
 <use ../figs/eigenmode_3d3.png>
-Package pdftex.def Info: ../figs/eigenmode_3d3.png  used on input line 93.
+Package pdftex.def Info: ../figs/eigenmode_3d3.png  used on input line 97.
 (pdftex.def)             Requested size: 150.14671pt x 112.60753pt.
-<../figs/eigenmode_3d4.png, id=15, 462.528pt x 346.896pt>
+<../figs/eigenmode_3d4.png, id=26, 462.528pt x 346.896pt>
 File: ../figs/eigenmode_3d4.png Graphic file (type png)
 <use ../figs/eigenmode_3d4.png>
-Package pdftex.def Info: ../figs/eigenmode_3d4.png  used on input line 96.
+Package pdftex.def Info: ../figs/eigenmode_3d4.png  used on input line 100.
 (pdftex.def)             Requested size: 150.14671pt x 112.60753pt.
-<../figs/eigenmode_3d5.png, id=16, 462.528pt x 346.896pt>
+<../figs/eigenmode_3d5.png, id=27, 462.528pt x 346.896pt>
 File: ../figs/eigenmode_3d5.png Graphic file (type png)
 <use ../figs/eigenmode_3d5.png>
-Package pdftex.def Info: ../figs/eigenmode_3d5.png  used on input line 99.
+Package pdftex.def Info: ../figs/eigenmode_3d5.png  used on input line 103.
 (pdftex.def)             Requested size: 150.14671pt x 112.60753pt.
-<../figs/eigenmode_3d6.png, id=17, 462.528pt x 346.896pt>
+<../figs/eigenmode_3d6.png, id=28, 462.528pt x 346.896pt>
 File: ../figs/eigenmode_3d6.png Graphic file (type png)
 <use ../figs/eigenmode_3d6.png>
-Package pdftex.def Info: ../figs/eigenmode_3d6.png  used on input line 102.
+Package pdftex.def Info: ../figs/eigenmode_3d6.png  used on input line 106.
 (pdftex.def)             Requested size: 150.14671pt x 112.60753pt.
-<../figs/eigenmode_3d7.png, id=18, 462.528pt x 346.896pt>
+<../figs/eigenmode_3d7.png, id=29, 462.528pt x 346.896pt>
 File: ../figs/eigenmode_3d7.png Graphic file (type png)
 <use ../figs/eigenmode_3d7.png>
-Package pdftex.def Info: ../figs/eigenmode_3d7.png  used on input line 105.
+Package pdftex.def Info: ../figs/eigenmode_3d7.png  used on input line 109.
 (pdftex.def)             Requested size: 150.14671pt x 112.60753pt.
-<../figs/eigenmode_3d8.png, id=19, 462.528pt x 346.896pt>
+<../figs/eigenmode_3d8.png, id=30, 462.528pt x 346.896pt>
 File: ../figs/eigenmode_3d8.png Graphic file (type png)
 <use ../figs/eigenmode_3d8.png>
-Package pdftex.def Info: ../figs/eigenmode_3d8.png  used on input line 108.
+Package pdftex.def Info: ../figs/eigenmode_3d8.png  used on input line 112.
 (pdftex.def)             Requested size: 150.14671pt x 112.60753pt.
-<../figs/eigenmode_3d9.png, id=20, 462.528pt x 346.896pt>
+<../figs/eigenmode_3d9.png, id=31, 462.528pt x 346.896pt>
 File: ../figs/eigenmode_3d9.png Graphic file (type png)
 <use ../figs/eigenmode_3d9.png>
-Package pdftex.def Info: ../figs/eigenmode_3d9.png  used on input line 111.
+Package pdftex.def Info: ../figs/eigenmode_3d9.png  used on input line 115.
 (pdftex.def)             Requested size: 150.14671pt x 112.60753pt.
-<../figs/eigenmode_3d10.png, id=21, 462.528pt x 346.896pt>
+<../figs/eigenmode_3d10.png, id=32, 462.528pt x 346.896pt>
 File: ../figs/eigenmode_3d10.png Graphic file (type png)
 <use ../figs/eigenmode_3d10.png>
-Package pdftex.def Info: ../figs/eigenmode_3d10.png  used on input line 114.
+Package pdftex.def Info: ../figs/eigenmode_3d10.png  used on input line 118.
 (pdftex.def)             Requested size: 150.14671pt x 112.60753pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 86--116
+Underfull \hbox (badness 10000) in paragraph at lines 90--120
 []$[]$ $[]$ $[]$
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 86--116
+Underfull \hbox (badness 10000) in paragraph at lines 90--120
 []$ $[]$ $[]$
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 86--116
+Underfull \hbox (badness 10000) in paragraph at lines 90--120
 []$ $[]$ $[]$
  []
 
-[1
-
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2 <../figs/eigenmode_2d1.
-png> <../figs/eigenmode_2d2.png> <../figs/eigenmode_2d3.png> <../figs/eigenmode
-_2d4.png> <../figs/eigenmode_2d5.png> <../figs/eigenmode_2d6.png> <../figs/eige
-nmode_2d7.png> <../figs/eigenmode_2d8.png> <../figs/eigenmode_2d9.png> <../figs
-/eigenmode_2d10.png>] [3 <../figs/eigenmode_3d1.png> <../figs/eigenmode_3d2.png
-> <../figs/eigenmode_3d3.png> <../figs/eigenmode_3d4.png> <../figs/eigenmode_3d
-5.png> <../figs/eigenmode_3d6.png> <../figs/eigenmode_3d7.png> <../figs/eigenmo
-de_3d8.png> <../figs/eigenmode_3d9.png> <../figs/eigenmode_3d10.png>]
-(./Fractal_drums.aux) ) 
+[2 <../figs/eigenmode_2d1.png> <../figs/eigenmode_2d2.png> <../figs/eigenmode_2
+d3.png> <../figs/eigenmode_2d4.png> <../figs/eigenmode_2d5.png> <../figs/eigenm
+ode_2d6.png> <../figs/eigenmode_2d7.png> <../figs/eigenmode_2d8.png> <../figs/e
+igenmode_2d9.png> <../figs/eigenmode_2d10.png>] [3 <../figs/eigenmode_3d1.png> 
+<../figs/eigenmode_3d2.png> <../figs/eigenmode_3d3.png> <../figs/eigenmode_3d4.
+png> <../figs/eigenmode_3d5.png> <../figs/eigenmode_3d6.png> <../figs/eigenmode
+_3d7.png> <../figs/eigenmode_3d8.png> <../figs/eigenmode_3d9.png> <../figs/eige
+nmode_3d10.png>] (./Fractal_drums.aux) ) 
 Here is how much of TeX's memory you used:
  3978 strings out of 492167
  60291 string characters out of 6131558
- 121827 words of memory out of 5000000
+ 118827 words of memory out of 5000000
  8276 multiletter control sequences out of 15000+600000
  11195 words of font info for 44 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 46i,7n,42p,512b,361s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-bx12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr
-/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmr17.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmsy10.pfb>
-Output written on Fractal_drums.pdf (3 pages, 1426977 bytes).
+ 46i,7n,42p,499b,361s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></u
+sr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmsy10.pfb>
+Output written on Fractal_drums.pdf (3 pages, 1427654 bytes).
 PDF statistics:
  79 PDF objects out of 1000 (max. 8388607)
  27 compressed objects within 1 object stream
