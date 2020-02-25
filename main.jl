@@ -34,8 +34,8 @@ if PROGRAM_FILE == basename(@__FILE__)
     points_inside, points_outside, points_border= arrayify(lattice)
     N = length(points_inside)
 
-    lap_mat = five_point_laplacian(N, lattice, points_inside)
-    #lap_mat = nine_point_laplacian(N, lattice, points_inside)
+    #lap_mat = five_point_laplacian(N, lattice, points_inside)
+    lap_mat = nine_point_laplacian(N, lattice, points_inside)
 
     println("Solving EV-problem")
     eigvals_many, eigvecs = eigs(lap_mat, nev=40, which=:SM)
@@ -55,10 +55,7 @@ if PROGRAM_FILE == basename(@__FILE__)
     ### DOS ###
     ###########
 
-    println("")
-    println("")
-    println("")
-    delta_N(eigvals_many, LEVEL, LPPS)
+    delta_N(eigvals_many, LEVEL, length(points_inside))
 
     ####################
     ### Plot results ###
