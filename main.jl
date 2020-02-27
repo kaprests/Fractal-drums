@@ -61,7 +61,6 @@ if PROGRAM_FILE == basename(@__FILE__)
     ### Plot results ###
     ####################
 
-"""
     println("PLotting")
     for i in 1:10
         idx = sorted_indices[i]
@@ -96,7 +95,6 @@ if PROGRAM_FILE == basename(@__FILE__)
         #plt.savefig(string("eigenmode_3d", i, ".png"))
         plt.show()
     end
-"""
 end
 
 

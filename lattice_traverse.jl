@@ -20,9 +20,10 @@ function is_enclosed(p::Tuple, lower, upper, frac_points, lat_const)
     INSIDE/OUTSIDE of fractal from the orientation of the curve.
     Checks if point is on BORDER before traversing
 
-    All points on the traverse path between the initial point and the
-    BORDER will have same location. Therfore it is not needed to 
-    do this traverse check for every point.
+    Can be improved:
+        All points on the traverse path between the initial point and the
+        BORDER will have same location. Therfore it is not needed to 
+        do this traverse check for every point.
 
     returns:
         determined_points: list of points (tuples)
