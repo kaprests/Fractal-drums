@@ -51,7 +51,6 @@ function arrayify(lattice)
     inside = []
     outside = []
     border = []
-    myst = []
     for (idx, p) in enumerate(CartesianIndices(lattice))
         if lattice[p] == BORDER
             push!(border, (p[1], p[2]))

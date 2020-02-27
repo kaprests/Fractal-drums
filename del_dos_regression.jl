@@ -4,12 +4,12 @@
 using CurveFit
 
 
-function delta_N(eigvals, level, lpps, n_inside)
+function delta_N(eigvals, level, n_inside)
     aomegas = sqrt.(eigvals)
 
     println("IDOS:")
 
-    frac_area = n_inside # (4^(2*(level-1)))*4*(lpps+1)^2
+    frac_area = n_inside
     delta_N = zeros(length(aomegas))
 
     for (idx, val) in enumerate(aomegas)
