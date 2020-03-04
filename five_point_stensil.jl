@@ -6,27 +6,29 @@ function five_point_laplacian(N, lattice, points_inside)
     x_vec = zeros(N*5)
     y_vec = zeros(N*5)
     v_vec = zeros(N*5)
+    
+    # Set inner indices (nn_idx)
+    for (i, p) in enumerate(points_inside)
+        lattice[p[1], p[2]] = i
+    end
 
     idx = 1
     for (i, p) in enumerate(points_inside)
         x, y = p 
-        #lap_matrix[idx, idx] = 4 
         x_vec[idx] = i
         y_vec[idx] = i
         v_vec[idx] = 4
         idx += 1
         for nn in (-1, 1)
-            if lattice[x+nn, y] == INSIDE
-                nn_idx = findfirst(p -> p== (x+nn, y), points_inside)
-                #lap_matrix[idx, nn_idx] = -1
+            if lattice[x+nn, y] > 0
+                nn_idx = lattice[x+nn, y] # Nearest neigbours inner index
                 x_vec[idx] = i
                 y_vec[idx] = nn_idx
                 v_vec[idx] = -1
                 idx += 1
             end
-            if lattice[x, y+nn] == INSIDE
-                nn_idx = findfirst(p -> p== (x, y+nn), points_inside)
-                #lap_matrix[idx, nn_idx] = -1
+            if lattice[x, y+nn] > 0
+                nn_idx = lattice[x, y+nn] # Nearest neigbours inner index
                 x_vec[idx] = i
                 y_vec[idx] = nn_idx
                 v_vec[idx] = -1

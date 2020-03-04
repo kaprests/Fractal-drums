@@ -2,23 +2,23 @@
 ### Lattice creation, breadth first like search from center ###
 ###############################################################
 
-
-@enum Location INSIDE OUTSIDE BORDER
-
+INSIDE_POINT = 1
+OUTSIDE_POINT = -1
+BORDER_POINT = 0
 
 function make_lattice(frac_points)
     x = first.(frac_points)
     N = Int(max(x...))
-    lattice = fill(OUTSIDE, (N, N))
+    lattice = fill(OUTSIDE_POINT, (N, N))
 
     for point in frac_points
-        lattice[Int(point[1]), Int(point[2])] = BORDER
+        lattice[Int(point[1]), Int(point[2])] = BORDER_POINT
     end
 
-    # Center is INSIDE, always
+    # Center is INSIDE_POINT, always
     x0 = y0 = Int((N+1)/2)
     center = (x0, y0)
-    lattice[x0, y0] = INSIDE
+    lattice[x0, y0] = INSIDE_POINT
 
     # neares neighbours of center
     left = (x0 - 1, y0)
@@ -30,9 +30,9 @@ function make_lattice(frac_points)
     println("begin search")
     for point in points
         x, y = point
-        if lattice[x, y] == OUTSIDE
-            # New INSIDE point
-            lattice[x, y] = INSIDE
+        if lattice[x, y] == OUTSIDE_POINT
+            # New INSIDE_POINT point
+            lattice[x, y] = INSIDE_POINT
 
             # Add nearest neighbours to points
             for nn in (-1, 1)
@@ -52,11 +52,11 @@ function arrayify(lattice)
     outside = []
     border = []
     for (idx, p) in enumerate(CartesianIndices(lattice))
-        if lattice[p] == BORDER
+        if lattice[p] == BORDER_POINT
             push!(border, (p[1], p[2]))
-        elseif lattice[p] == OUTSIDE
+        elseif lattice[p] == OUTSIDE_POINT
             push!(outside, (p[1], p[2]))
-        elseif lattice[p] == INSIDE
+        elseif lattice[p] > 0
             push!(inside, (p[1], p[2]))
         end
     end
