@@ -2,7 +2,6 @@
 # The corresponding eigenstates
 
 include("setup.jl")
-include("del_dos_regression.jl")
 include("five_point_stensil.jl")
 include("nine_point_stensil.jl")
 using SparseArrays
@@ -14,7 +13,7 @@ if PROGRAM_FILE == basename(@__FILE__)
     ### Ser parameters, LEVEL and GRID_RES ###
     ##########################################
 
-    PLOTTING = false
+    PLOTTING = true
     LEVEL = 3
     GRID_RES = 1
 
@@ -54,18 +53,18 @@ if PROGRAM_FILE == basename(@__FILE__)
     println("Bytesize of laplacian matrix (MB): ", mem_used)
     println("Percentage of total: ", mem_used*100/TOTAL_MEMORY_MB)
 
-    ###########
-    ### DOS ###
-    ###########
-
-    delta_N(eigvals, N)
-
     ####################
     ### Plot results ###
     ####################
 
     if PLOTTING
         println("Plotting")
+
+        plt.pcolormesh(lap_mat)
+        plt.title(string("level: ", LEVEL, ", grid_res: ", GRID_RES))
+        plt.savefig("laplacian_matrix.pdf")
+        plt.show()
+
         for i in 1:10
             idx = sorted_indices[i]
             for (j, p) in enumerate(points_inside)

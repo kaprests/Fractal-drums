@@ -44,9 +44,6 @@ if basename(PROGRAM_FILE) == basename(@__FILE__)
     lap_mat = five_point_laplacian(N, lattice, points_inside)
     #lap_mat = nine_point_laplacian(N, lattice, points_inside)
 
-#    plt.imshow(lap_mat)
-#    plt.show()
-
     println("Solving EV-problem")
     eigvals, vecs = eigs(lap_mat, nev=NEV, which=:SM, ritzvec=false)
 
