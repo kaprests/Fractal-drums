@@ -1,3 +1,6 @@
+# Solves the eigenvalue problem for the ten lowest eigenvalues and plots
+# The corresponding eigenstates
+
 include("setup.jl")
 include("del_dos_regression.jl")
 include("five_point_stensil.jl")
@@ -7,12 +10,13 @@ using Arpack
 
 
 if PROGRAM_FILE == basename(@__FILE__)
-    ######################################
-    ### Ser parameters, LEVEL and LPPS ###
-    ######################################
+    ##########################################
+    ### Ser parameters, LEVEL and GRID_RES ###
+    ##########################################
 
+    PLOTTING = false
     LEVEL = 3
-    LPPS = 1
+    GRID_RES = 1
 
     if length(ARGS) >= 1
         LEVEL = parse(Int, ARGS[1])
@@ -21,16 +25,16 @@ if PROGRAM_FILE == basename(@__FILE__)
     end
 
     if length(ARGS) >= 2
-        LPPS = parse(Int, ARGS[2])
+        GRID_RES = parse(Int, ARGS[2])
     else
-        println("No argument provided, using default LPPS=1")
+        println("No argument provided, using default GRID_RES=1")
     end
 
     ###########################################################
     ### Make lattice, laplacian matrix and solce EV-problem ###
     ###########################################################
 
-    lattice, frac = gen_quadkoch(LEVEL, LPPS)
+    lattice, frac = gen_quadkoch(LEVEL, GRID_RES)
     points_inside, points_outside, points_border= arrayify(lattice)
     N = length(points_inside)
 
@@ -38,8 +42,7 @@ if PROGRAM_FILE == basename(@__FILE__)
     #lap_mat = nine_point_laplacian(N, lattice, points_inside)
 
     println("Solving EV-problem")
-    eigvals_many, eigvecs = eigs(lap_mat, nev=40, which=:SM)
-    eigvals = eigvals_many[1:10]
+    eigvals, eigvecs = eigs(lap_mat, nev=10, which=:SM)
     sorted_indices = sortperm(eigvals)
 
     grid = zeros(size(lattice, 1), size(lattice, 1), 10)
@@ -55,45 +58,47 @@ if PROGRAM_FILE == basename(@__FILE__)
     ### DOS ###
     ###########
 
-    delta_N(eigvals_many, LEVEL, length(points_inside))
+    delta_N(eigvals, N)
 
     ####################
     ### Plot results ###
     ####################
 
-    println("PLotting")
-    for i in 1:10
-        idx = sorted_indices[i]
-        for (j, p) in enumerate(points_inside)
-            grid[p[1], p[2], i] = eigvecs[:, i][j]
-            surf_grid[p[1], p[2], i] = eigvecs[:, i][j]
-        end
+    if PLOTTING
+        println("Plotting")
+        for i in 1:10
+            idx = sorted_indices[i]
+            for (j, p) in enumerate(points_inside)
+                grid[p[1], p[2], i] = eigvecs[:, i][j]
+                surf_grid[p[1], p[2], i] = eigvecs[:, i][j]
+            end
 
-        for (j, p) in enumerate(points_border)
-            surf_grid[p[1], p[2], i] = 0
-        end
-        
-        plt.imshow(transpose(grid[:, :, i]), origin="upper")
-        plt.plot(first.(frac) .- 1 , last.(frac) .- 1)
-        plt.title(string("eigenmode #", i, ", fractal LEVEL: ", LEVEL, ", LPPS: ", LPPS))
-        #plt.savefig(string("eigenmode_2d", i, ".png"))
-        plt.show()
+            for (j, p) in enumerate(points_border)
+                surf_grid[p[1], p[2], i] = 0
+            end
+            
+            plt.imshow(transpose(grid[:, :, i]), origin="upper")
+            plt.plot(first.(frac) .- 1 , last.(frac) .- 1)
+            plt.title(string("eigenmode #", i, ", fractal LEVEL: ", LEVEL, ", GRID_RES: ", GRID_RES))
+            #plt.savefig(string("eigenmode_2d", i, ".png"))
+            plt.show()
 
-        xy = collect(1: size(lattice, 1))
-        plt.title(string("eigenmode #", i, ", fractal LEVEL: ", LEVEL, ", LPPS: ", LPPS))
-        if length(ARGS) >= 3
-            if ARGS[3] == "wire"
-                plt.plot_wireframe(xy, xy, transpose(surf_grid[:, :, i] ./ 10), color="gray")
-                plt.plot(first.(frac) , last.(frac), color="red")
-                plt.savefig(string("eigenmode_3d_wireframe", i, ".png"))
+            xy = collect(1: size(lattice, 1))
+            plt.title(string("eigenmode #", i, ", fractal LEVEL: ", LEVEL, ", GRID_RES: ", GRID_RES))
+            if length(ARGS) >= 3
+                if ARGS[3] == "wire"
+                    plt.plot_wireframe(xy, xy, transpose(surf_grid[:, :, i] ./ 10), color="gray")
+                    plt.plot(first.(frac) , last.(frac), color="red")
+                    plt.savefig(string("eigenmode_3d_wireframe", i, ".png"))
+                else
+                    plt.surf(grid[:, :, i], cmap=plt.cm.coolwarm, alpha=1)
+                end
             else
                 plt.surf(grid[:, :, i], cmap=plt.cm.coolwarm, alpha=1)
             end
-        else
-            plt.surf(grid[:, :, i], cmap=plt.cm.coolwarm, alpha=1)
+            #plt.savefig(string("eigenmode_3d", i, ".png"))
+            plt.show()
         end
-        #plt.savefig(string("eigenmode_3d", i, ".png"))
-        plt.show()
     end
 end
 
