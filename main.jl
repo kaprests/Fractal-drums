@@ -45,7 +45,6 @@ if PROGRAM_FILE == basename(@__FILE__)
     sorted_indices = sortperm(eigvals)
 
     grid = zeros(size(lattice, 1), size(lattice, 1), 10)
-    #surf_grid = Array{Float64, 3}(undef, (size(lattice, 1), size(lattice, 1), 10))
     surf_grid = fill(NaN, (size(lattice, 1), size(lattice, 1), 10))
 
     TOTAL_MEMORY_MB = 8030668
@@ -59,28 +58,31 @@ if PROGRAM_FILE == basename(@__FILE__)
 
     if PLOTTING
         println("Plotting")
-
+"""
         plt.pcolormesh(lap_mat)
         plt.title(string("level: ", LEVEL, ", grid_res: ", GRID_RES))
         plt.savefig("laplacian_matrix.pdf")
         plt.show()
+"""
 
         for i in 1:10
             idx = sorted_indices[i]
             for (j, p) in enumerate(points_inside)
                 grid[p[1], p[2], i] = eigvecs[:, i][j]
-                surf_grid[p[1], p[2], i] = eigvecs[:, i][j]
+                #surf_grid[p[1], p[2], i] = eigvecs[:, i][j]
             end
 
+"""
             for (j, p) in enumerate(points_border)
                 surf_grid[p[1], p[2], i] = 0
             end
-            
+"""
             plt.imshow(transpose(grid[:, :, i]), origin="upper")
             plt.plot(first.(frac) .- 1 , last.(frac) .- 1)
             plt.title(string("eigenmode #", i, ", fractal LEVEL: ", LEVEL, ", GRID_RES: ", GRID_RES))
-            #plt.savefig(string("eigenmode_2d", i, ".png"))
+            plt.savefig(string("eigenmode_2d", i, ".png"))
             plt.show()
+            #plt.close()
 
             xy = collect(1: size(lattice, 1))
             plt.title(string("eigenmode #", i, ", fractal LEVEL: ", LEVEL, ", GRID_RES: ", GRID_RES))
@@ -95,8 +97,10 @@ if PROGRAM_FILE == basename(@__FILE__)
             else
                 plt.surf(grid[:, :, i], cmap=plt.cm.coolwarm, alpha=1)
             end
-            #plt.savefig(string("eigenmode_3d", i, ".png"))
+            plt.plot(first.(frac) , last.(frac), color="red")
+            plt.savefig(string("eigenmode_3d", i, ".png"))
             plt.show()
+            #plt.close()
         end
     end
 end
