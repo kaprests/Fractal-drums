@@ -42,8 +42,13 @@ function main()
     points_inside, points_outside, points_border= arrayify(lattice)
     N = length(points_inside)
 
-    lap_mat = five_point_laplacian(N, lattice, points_inside)
-    #lap_mat = nine_point_laplacian(N, lattice, points_inside)
+    #lap_mat = five_point_laplacian(N, lattice, points_inside)
+    lap_mat = nine_point_laplacian(N, lattice, points_inside)
+
+    TOTAL_MEMORY_MB = 7660000 # available according to htop
+    mem_used = sizeof(lap_mat)*1e-6
+    println("Bytesize of laplacian matrix (MB): ", mem_used)
+    println("Percentage of total: ", mem_used*100/TOTAL_MEMORY_MB)
 
     println("Solving EV-problem")
     eigvals, eigvecs = eigs(lap_mat, nev=NEV, which=:SM)
@@ -52,11 +57,6 @@ function main()
     if WIRE
         wireframe_grid = fill(NaN, (size(lattice, 1), size(lattice, 1), 10))
     end
-
-    TOTAL_MEMORY_MB = 8030668
-    mem_used = sizeof(lap_mat)*1e-6
-    println("Bytesize of laplacian matrix (MB): ", mem_used)
-    println("Percentage of total: ", mem_used*100/TOTAL_MEMORY_MB)
 
     if SAVE
         # Save eigenvalues and vectors to file

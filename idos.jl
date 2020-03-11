@@ -21,6 +21,7 @@ function delta_N(eigvals, n_inside, level, grid_res)
     plt.plot(aomegas, delta_N, ".")
     plt.plot(aomegas, fit.(aomegas), label=string("level: ", Int(level), ", grid_res: ", Int(grid_res)))
     plt.legend()
+    plt.savefig("idos.pdf")
 end
 
 
