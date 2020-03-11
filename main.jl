@@ -8,7 +8,7 @@ using SparseArrays
 using Arpack
 using DelimitedFiles
 
-
+# Consider splitting this up into smaller functions
 function main()
     ##########################################
     ### Ser parameters, LEVEL and GRID_RES ###
@@ -47,7 +47,6 @@ function main()
 
     println("Solving EV-problem")
     eigvals, eigvecs = eigs(lap_mat, nev=NEV, which=:SM)
-    sorted_indices = sortperm(eigvals)
 
     grid = zeros(size(lattice, 1), size(lattice, 1), 10)
     if WIRE
@@ -77,7 +76,7 @@ function main()
 
     if PLOTTING
         println("Plotting")
-        if (LEVEL < 3) && (GRID_RES < 2)
+        if (LEVEL == 1) && (GRID_RES == 2)
             plt.pcolormesh(lap_mat)
             plt.title(string("level: ", LEVEL, ", grid_res: ", GRID_RES))
             plt.savefig("laplacian_matrix.pdf")
@@ -87,7 +86,7 @@ function main()
         end
 
         for i in 1:NEV
-            idx = sorted_indices[i]
+            # For high levels the loop below seems to be slower than the eigen calculation...
             for (j, p) in Base.Iterators.enumerate(points_inside)
                 grid[p[1], p[2], i] = eigvecs[:, i][j]
                 #wireframe_grid[p[1], p[2], i] = eigvecs[:, i][j]

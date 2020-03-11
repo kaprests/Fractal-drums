@@ -2,9 +2,9 @@
 ### Lattice creation, breadth first like search from center ###
 ###############################################################
 
-INSIDE_POINT = 1
-OUTSIDE_POINT = -1
-BORDER_POINT = 0
+const INSIDE_POINT = 1
+const OUTSIDE_POINT = -1
+const BORDER_POINT = 0
 
 function make_lattice(frac_points)
     x = first.(frac_points)

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=pdflatex 2020.2.11)  27 FEB 2020 18:33
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=pdflatex 2020.3.9)  10 MAR 2020 14:23
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -316,6 +316,14 @@ Package textcomp Info: Setting pplj sub-encoding to TS1/3 on input line 407.
 Package textcomp Info: Setting ptmx sub-encoding to TS1/4 on input line 408.
 Package textcomp Info: Setting ptmj sub-encoding to TS1/4 on input line 409.
 )
+(/usr/share/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count104
+\float@exts=\toks21
+\float@box=\box29
+\@float@everytoks=\toks22
+\@floatcapt=\box30
+)
 (/usr/share/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2019/09/10 1.8c listings language file
 )
@@ -324,26 +332,26 @@ File: lstmisc.sty 2019/09/10 1.8c (Carsten Heinz)
 ) (./Fractal_drums.aux)
 \openout1 = `Fractal_drums.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 34.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 35.
 LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 3
-4.
+5.
 
 (/usr/share/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    ... okay on input line 35.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -380,21 +388,22 @@ LaTeX Font Info:    ... okay on input line 34.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: float package is loaded.
 Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
 (/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count104
+\scratchcounter=\count105
 \scratchdimen=\dimen124
-\scratchbox=\box29
-\nofMPsegments=\count105
-\nofMParguments=\count106
-\everyMPshowfont=\toks21
-\MPscratchCnt=\count107
+\scratchbox=\box31
+\nofMPsegments=\count106
+\nofMParguments=\count107
+\everyMPshowfont=\toks23
+\MPscratchCnt=\count108
 \MPscratchDim=\dimen125
-\MPnumerator=\count108
-\makeMPintoPDFobject=\count109
-\everyMPtoPDFconversion=\toks22
+\MPnumerator=\count109
+\makeMPintoPDFobject=\count110
+\everyMPtoPDFconversion=\toks24
 ) (/usr/share/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
 
@@ -442,173 +451,179 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-\c@lstlisting=\count110
-LaTeX Font Info:    Trying to load font information for U+msa on input line 35.
+\c@lstlisting=\count111
+LaTeX Font Info:    Trying to load font information for U+msa on input line 36.
 
 
 (/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 35.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 36.
 
 
 (/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-<../figs/koch_frac_step.pdf, id=1, 845.04686pt x 312.98033pt>
-File: ../figs/koch_frac_step.pdf Graphic file (type pdf)
-<use ../figs/koch_frac_step.pdf>
-Package pdftex.def Info: ../figs/koch_frac_step.pdf  used on input line 68.
+<./media/koch_frac_step.pdf, id=1, 845.04686pt x 312.98033pt>
+File: ./media/koch_frac_step.pdf Graphic file (type pdf)
+<use ./media/koch_frac_step.pdf>
+Package pdftex.def Info: ./media/koch_frac_step.pdf  used on input line 69.
 (pdftex.def)             Requested size: 500.484pt x 84.25618pt.
 
 
-LaTeX Warning: Reference `wave-equation' on page 1 undefined on input line 74.
+LaTeX Warning: Reference `wave-equation' on page 1 undefined on input line 75.
 
 
-LaTeX Warning: Reference `wave-equation' on page 1 undefined on input line 74.
+LaTeX Warning: Reference `wave-equation' on page 1 undefined on input line 75.
 
 
 LaTeX Warning: Reference `helmholtz-equation' on page 1 undefined on input line
- 74.
+ 75.
 
 [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
 
 LaTeX Warning: Reference `helmholtz-equation' on page 2 undefined on input line
- 84.
+ 85.
 
 
 LaTeX Warning: Reference `helmholtz-equation' on page 2 undefined on input line
- 84.
+ 85.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 99--100
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 102--104
+Underfull \hbox (badness 10000) in paragraph at lines 100--101
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 106--108
+Underfull \hbox (badness 10000) in paragraph at lines 103--105
 
  []
 
-[2 <../figs/koch_frac_step.pdf>]
+
+Underfull \hbox (badness 10000) in paragraph at lines 107--109
+
+ []
+
+[2 <./media/koch_frac_step.pdf>]
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <9> not available
-(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 114.
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 115.
 
-Underfull \hbox (badness 10000) in paragraph at lines 137--139
+Underfull \hbox (badness 10000) in paragraph at lines 138--140
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 152--155
+Underfull \hbox (badness 10000) in paragraph at lines 153--156
 
  []
 
 [3]
-<../figs/quad_koch_level2.pdf, id=23, 462.52798pt x 346.89601pt>
-File: ../figs/quad_koch_level2.pdf Graphic file (type pdf)
-<use ../figs/quad_koch_level2.pdf>
-Package pdftex.def Info: ../figs/quad_koch_level2.pdf  used on input line 183.
+<./media/laplacian_matrix.pdf, id=23, 462.52798pt x 346.89601pt>
+File: ./media/laplacian_matrix.pdf Graphic file (type pdf)
+<use ./media/laplacian_matrix.pdf>
+Package pdftex.def Info: ./media/laplacian_matrix.pdf  used on input line 180.
+(pdftex.def)             Requested size: 500.484pt x 375.38315pt.
+<./media/quad_koch_level2.pdf, id=24, 462.52798pt x 346.89601pt>
+File: ./media/quad_koch_level2.pdf Graphic file (type pdf)
+<use ./media/quad_koch_level2.pdf>
+Package pdftex.def Info: ./media/quad_koch_level2.pdf  used on input line 189.
 (pdftex.def)             Requested size: 250.24199pt x 187.68098pt.
-<../figs/quad_koch_level3.pdf, id=24, 462.52798pt x 346.89601pt>
-File: ../figs/quad_koch_level3.pdf Graphic file (type pdf)
-<use ../figs/quad_koch_level3.pdf>
-Package pdftex.def Info: ../figs/quad_koch_level3.pdf  used on input line 186.
+<./media/quad_koch_level3.pdf, id=25, 462.52798pt x 346.89601pt>
+File: ./media/quad_koch_level3.pdf Graphic file (type pdf)
+<use ./media/quad_koch_level3.pdf>
+Package pdftex.def Info: ./media/quad_koch_level3.pdf  used on input line 192.
 (pdftex.def)             Requested size: 250.24199pt x 187.68098pt.
 
-Overfull \hbox (2.2222pt too wide) in paragraph at lines 182--188
+Overfull \hbox (2.2222pt too wide) in paragraph at lines 188--194
 []$[]$ $[]$ 
  []
 
-[4 <../figs/quad_koch_level2.pdf> <../figs/quad_koch_level3.pdf
+[4 <./media/laplacian_matrix.pdf>] [5 <./media/quad_koch_level2.pdf> <./media/q
+uad_koch_level3.pdf
 
-pdfTeX warning: pdflatex (file ../figs/quad_koch_level3.pdf): PDF inclusion: mu
+pdfTeX warning: pdflatex (file ./media/quad_koch_level3.pdf): PDF inclusion: mu
 ltiple pdfs with page group included in a single page
 >]
-<../figs/eigenmode_2d1.png, id=60, 462.528pt x 346.896pt>
-File: ../figs/eigenmode_2d1.png Graphic file (type png)
-<use ../figs/eigenmode_2d1.png>
-Package pdftex.def Info: ../figs/eigenmode_2d1.png  used on input line 210.
+<./media/eigenmode_2d1.png, id=88, 462.528pt x 346.896pt>
+File: ./media/eigenmode_2d1.png Graphic file (type png)
+<use ./media/eigenmode_2d1.png>
+Package pdftex.def Info: ./media/eigenmode_2d1.png  used on input line 216.
 (pdftex.def)             Requested size: 150.14671pt x 112.60753pt.
-<../figs/eigenmode_2d2.png, id=62, 462.528pt x 346.896pt>
-File: ../figs/eigenmode_2d2.png Graphic file (type png)
-<use ../figs/eigenmode_2d2.png>
-Package pdftex.def Info: ../figs/eigenmode_2d2.png  used on input line 213.
+<./media/eigenmode_2d2.png, id=90, 462.528pt x 346.896pt>
+File: ./media/eigenmode_2d2.png Graphic file (type png)
+<use ./media/eigenmode_2d2.png>
+Package pdftex.def Info: ./media/eigenmode_2d2.png  used on input line 219.
 (pdftex.def)             Requested size: 150.14671pt x 112.60753pt.
-<../figs/eigenmode_2d3.png, id=63, 462.528pt x 346.896pt>
-File: ../figs/eigenmode_2d3.png Graphic file (type png)
-<use ../figs/eigenmode_2d3.png>
-Package pdftex.def Info: ../figs/eigenmode_2d3.png  used on input line 216.
+<./media/eigenmode_2d3.png, id=91, 462.528pt x 346.896pt>
+File: ./media/eigenmode_2d3.png Graphic file (type png)
+<use ./media/eigenmode_2d3.png>
+Package pdftex.def Info: ./media/eigenmode_2d3.png  used on input line 222.
 (pdftex.def)             Requested size: 150.14671pt x 112.60753pt.
-<../figs/eigenmode_2d4.png, id=64, 462.528pt x 346.896pt>
-File: ../figs/eigenmode_2d4.png Graphic file (type png)
-<use ../figs/eigenmode_2d4.png>
-Package pdftex.def Info: ../figs/eigenmode_2d4.png  used on input line 219.
+<./media/eigenmode_2d4.png, id=92, 462.528pt x 346.896pt>
+File: ./media/eigenmode_2d4.png Graphic file (type png)
+<use ./media/eigenmode_2d4.png>
+Package pdftex.def Info: ./media/eigenmode_2d4.png  used on input line 225.
 (pdftex.def)             Requested size: 150.14671pt x 112.60753pt.
-<../figs/eigenmode_2d5.png, id=65, 462.528pt x 346.896pt>
-File: ../figs/eigenmode_2d5.png Graphic file (type png)
-<use ../figs/eigenmode_2d5.png>
-Package pdftex.def Info: ../figs/eigenmode_2d5.png  used on input line 222.
+<./media/eigenmode_2d5.png, id=93, 462.528pt x 346.896pt>
+File: ./media/eigenmode_2d5.png Graphic file (type png)
+<use ./media/eigenmode_2d5.png>
+Package pdftex.def Info: ./media/eigenmode_2d5.png  used on input line 228.
 (pdftex.def)             Requested size: 150.14671pt x 112.60753pt.
-<../figs/eigenmode_2d6.png, id=66, 462.528pt x 346.896pt>
-File: ../figs/eigenmode_2d6.png Graphic file (type png)
-<use ../figs/eigenmode_2d6.png>
-Package pdftex.def Info: ../figs/eigenmode_2d6.png  used on input line 225.
+<./media/eigenmode_2d6.png, id=94, 462.528pt x 346.896pt>
+File: ./media/eigenmode_2d6.png Graphic file (type png)
+<use ./media/eigenmode_2d6.png>
+Package pdftex.def Info: ./media/eigenmode_2d6.png  used on input line 231.
 (pdftex.def)             Requested size: 150.14671pt x 112.60753pt.
-<../figs/eigenmode_2d7.png, id=67, 462.528pt x 346.896pt>
-File: ../figs/eigenmode_2d7.png Graphic file (type png)
-<use ../figs/eigenmode_2d7.png>
-Package pdftex.def Info: ../figs/eigenmode_2d7.png  used on input line 228.
+<./media/eigenmode_2d7.png, id=95, 462.528pt x 346.896pt>
+File: ./media/eigenmode_2d7.png Graphic file (type png)
+<use ./media/eigenmode_2d7.png>
+Package pdftex.def Info: ./media/eigenmode_2d7.png  used on input line 234.
 (pdftex.def)             Requested size: 150.14671pt x 112.60753pt.
-<../figs/eigenmode_2d8.png, id=68, 462.528pt x 346.896pt>
-File: ../figs/eigenmode_2d8.png Graphic file (type png)
-<use ../figs/eigenmode_2d8.png>
-Package pdftex.def Info: ../figs/eigenmode_2d8.png  used on input line 231.
+<./media/eigenmode_2d8.png, id=96, 462.528pt x 346.896pt>
+File: ./media/eigenmode_2d8.png Graphic file (type png)
+<use ./media/eigenmode_2d8.png>
+Package pdftex.def Info: ./media/eigenmode_2d8.png  used on input line 237.
 (pdftex.def)             Requested size: 150.14671pt x 112.60753pt.
-<../figs/eigenmode_2d9.png, id=69, 462.528pt x 346.896pt>
-File: ../figs/eigenmode_2d9.png Graphic file (type png)
-<use ../figs/eigenmode_2d9.png>
-Package pdftex.def Info: ../figs/eigenmode_2d9.png  used on input line 234.
+<./media/eigenmode_2d9.png, id=97, 462.528pt x 346.896pt>
+File: ./media/eigenmode_2d9.png Graphic file (type png)
+<use ./media/eigenmode_2d9.png>
+Package pdftex.def Info: ./media/eigenmode_2d9.png  used on input line 240.
 (pdftex.def)             Requested size: 150.14671pt x 112.60753pt.
-<../figs/eigenmode_2d10.png, id=70, 462.528pt x 346.896pt>
-File: ../figs/eigenmode_2d10.png Graphic file (type png)
-<use ../figs/eigenmode_2d10.png>
-Package pdftex.def Info: ../figs/eigenmode_2d10.png  used on input line 237.
+<./media/eigenmode_2d10.png, id=98, 462.528pt x 346.896pt>
+File: ./media/eigenmode_2d10.png Graphic file (type png)
+<use ./media/eigenmode_2d10.png>
+Package pdftex.def Info: ./media/eigenmode_2d10.png  used on input line 243.
 (pdftex.def)             Requested size: 150.14671pt x 112.60753pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 209--239
+Underfull \hbox (badness 10000) in paragraph at lines 215--245
 []$[]$ $[]$ $[]$
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 209--239
+Underfull \hbox (badness 10000) in paragraph at lines 215--245
 []$ $[]$ $[]$
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 209--239
+Underfull \hbox (badness 10000) in paragraph at lines 215--245
 []$ $[]$ $[]$
  []
 
-[5 <../figs/eigenmode_2d1.png> <../figs/eigenmode_2d2.png> <../figs/eigenmode_2
-d3.png> <../figs/eigenmode_2d4.png> <../figs/eigenmode_2d5.png> <../figs/eigenm
-ode_2d6.png> <../figs/eigenmode_2d7.png> <../figs/eigenmode_2d8.png> <../figs/e
-igenmode_2d9.png> <../figs/eigenmode_2d10.png>] (./Fractal_drums.aux)
+[6 <./media/eigenmode_2d1.png> <./media/eigenmode_2d2.png> <./media/eigenmode_2
+d3.png> <./media/eigenmode_2d4.png> <./media/eigenmode_2d5.png> <./media/eigenm
+ode_2d6.png> <./media/eigenmode_2d7.png> <./media/eigenmode_2d8.png> <./media/e
+igenmode_2d9.png> <./media/eigenmode_2d10.png>] (./Fractal_drums.aux)
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 6288 strings out of 492167
- 90536 string characters out of 6131558
- 365293 words of memory out of 5000000
- 10557 multiletter control sequences out of 15000+600000
+ 6342 strings out of 492167
+ 91368 string characters out of 6131559
+ 366616 words of memory out of 5000000
+ 10606 multiletter control sequences out of 15000+600000
  11969 words of font info for 47 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  46i,9n,51p,615b,1630s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -619,10 +634,10 @@ c/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/c
 mr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/
 share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-di
 st/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on Fractal_drums.pdf (5 pages, 773343 bytes).
+Output written on Fractal_drums.pdf (6 pages, 915986 bytes).
 PDF statistics:
- 110 PDF objects out of 1000 (max. 8388607)
- 50 compressed objects within 1 object stream
+ 138 PDF objects out of 1000 (max. 8388607)
+ 58 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 66 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 71 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -18,7 +18,3 @@ The other files are as mentioned included in main, but some can be run by themse
 | ![mode1](./figs/eigenmode_2d8.png) | ![mode1](./figs/eigenmode_3d8.png) |
 | ![mode1](./figs/eigenmode_2d9.png) | ![mode1](./figs/eigenmode_3d9.png) |
 | ![mode1](./figs/eigenmode_2d10.png) | ![mode1](./figs/eigenmode_3d10.png) |
-| Wireframe plots | |
-| ![mode1](./figs/eigenmode_3d_wireframe1.png) | ![mode1](./figs/eigenmode_3d_wireframe2.png) |
-| ![mode1](./figs/eigenmode_3d_wireframe3.png) | ![mode1](./figs/eigenmode_3d_wireframe4.png) |
-| ![mode1](./figs/eigenmode_3d_wireframe5.png) |  |

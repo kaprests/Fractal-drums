@@ -11,7 +11,6 @@ if basename(PROGRAM_FILE) == basename(@__FILE__)
     ##########################################
     ### Set parameters, LEVEL and GRID_RES ###
     ##########################################
-    println("HEHEHEHE")
 
     LEVEL = 3
     GRID_RES = 1
@@ -38,7 +37,6 @@ if basename(PROGRAM_FILE) == basename(@__FILE__)
     points_inside, points_outside, points_border= arrayify(lattice)
     N = length(points_inside)
 
-    println("HEHEHEHE")
     println("N: ", N)
 
     lap_mat = five_point_laplacian(N, lattice, points_inside)
