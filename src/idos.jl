@@ -30,11 +30,11 @@ end
 ########################
 
 ### Read eigenvalues from files ###
-num_files = length(readdir("eigenvalues"))
+num_files = length(readdir("../../eigenvalues"))
 eig_matrix = zeros(num_files, 1000)
 
-for (idx, filename) in enumerate(readdir("eigenvalues"))
-    filename = string("./eigenvalues/", filename)
+for (idx, filename) in enumerate(readdir("../../eigenvalues"))
+    filename = string("../../eigenvalues/", filename)
     level = readdlm(filename, '\n')[1]
     grid_res = readdlm(filename, '\n')[2]
     num_inside = readdlm(filename, '\n')[3]

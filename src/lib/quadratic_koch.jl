@@ -1,13 +1,13 @@
+module quad_koch
+
 import PyPlot
 plt = PyPlot
 
-
-#############################
-### Generate Koch fractal ###
-#############################
+export gen_quad_koch, make_and_plot_fractal
 
 
 function gen_initial_square(level, n_between)
+    """ Create initial square (fractal of level 0) """
     side_length = (4^(level))*(1 + n_between)
     min = 1
     max = side_length+min
@@ -20,7 +20,7 @@ end
 
 
 function generate_side(side)
-    """ performs one generate step on a side of the fractal """
+    """ perform one generate step on a side of the fractal """
     a = side[1]
     b = side[2]
     #len = max(abs(b[1]-a[1]), abs(b[2]-a[2]))
@@ -74,7 +74,7 @@ end
 
 
 function gen_corners(level, corners)
-    """ Recursively generates fractal from given initial shape and recursion depth level """
+    """ Recursively generate fractal from given initial shape and recursion depth level """
     println("LEVEL: ", level)
     if level == 0
         corners = unique(corners)
@@ -104,6 +104,7 @@ end
 
 
 function fill_edges(frac_corners, n_between)
+    """ Adds points between vertices of koch fractal """
     n_corners = length(frac_corners)
     n_fill = n_corners * n_between
     n_tot = n_corners + n_fill
@@ -132,6 +133,7 @@ end
 
 
 function gen_quad_koch(level, e_fill)
+    """ Generate a quadratic koch fractal of given level """
     initial_square = gen_initial_square(level, e_fill)
     frac_corners = gen_corners(level, initial_square)
     frac_points = fill_edges(frac_corners, e_fill)
@@ -139,16 +141,14 @@ function gen_quad_koch(level, e_fill)
 end
 
 
-####################
-### Plot fractal ###
-####################
-
-
-function make_and_plot_fractal(level, n_between=0)
+function make_and_plot_fractal(level, n_between)
     square = gen_initial_square(level, n_between)
     frac_corners = gen_corners(level, square)
     frac_points = fill_edges(frac_corners, n_between)
+
+    plt.title(string("Level:", level))
     plt.plot(first.(frac_points), last.(frac_points))
+    plt.savefig(string("quad_koch_level", level,".pdf"))
     plt.show()
 end
 
@@ -158,3 +158,4 @@ if PROGRAM_FILE == basename(@__FILE__)
 end
 
 
+end

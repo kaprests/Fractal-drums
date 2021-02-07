@@ -1,7 +1,12 @@
-############################################################################
-### Lattice creation, naive traverse method to determine point locations ###
-############################################################################
+"""
+DEPRECATED:
+    Replaced by lattice_bfs.jl
 
+Lattice creation, naive traverse method to determine point locations
+"""
+module lattice_traverse
+
+export 
 
 @enum Location INSIDE OUTSIDE BORDER
 
@@ -174,3 +179,4 @@ function get_location_points(lattice)
 end
 
 
+end

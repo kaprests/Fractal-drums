@@ -1,11 +1,11 @@
 # Solves the eigenvalue problem for the 1000 lowest eigenvalues and saves them to file
 
-include("setup.jl")
-include("five_point_stensil.jl")
-include("nine_point_stensil.jl")
+include("./lib/fractal_drums.jl")
+using .fractal_drums
 using SparseArrays
 using Arpack
 using DelimitedFiles
+
 
 if basename(PROGRAM_FILE) == basename(@__FILE__)
     ##########################################
@@ -33,7 +33,8 @@ if basename(PROGRAM_FILE) == basename(@__FILE__)
     ### Make lattice, laplacian matrix and solce EV-problem ###
     ###########################################################
 
-    lattice, frac = gen_quadkoch(LEVEL, GRID_RES)
+    frac = gen_quad_koch(LEVEL, GRID_RES)
+    lattice = make_lattice(frac)
     points_inside, points_outside, points_border= arrayify(lattice)
     N = length(points_inside)
 
